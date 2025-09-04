@@ -12,16 +12,12 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Recharts -->
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- React and dependencies -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/recharts@2.8.0/umd/Recharts.js"></script>
-    
-    <!-- Babel for JSX -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     
     <style>
         .time-input {
@@ -44,88 +40,7 @@
 
     <script type="text/babel">
         const { useState, useEffect } = React;
-        const { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } = Recharts;
-
-        // Icons as SVG components
-        const CarIcon = ({ size = 24, className = "" }) => (
-            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className}>
-                <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9L18.7 9.8c-.2-.5-.6-.8-1.1-.8h-11c-.5 0-.9.3-1.1.8L3.8 11.1C3.1 11.3 2.4 12.1 2.4 13v3c0 .6.4 1 1 1h2"/>
-                <circle cx="7" cy="17" r="2"/>
-                <circle cx="17" cy="17" r="2"/>
-            </svg>
-        );
-
-        const ElevatorIcon = ({ size = 24, className = "" }) => (
-            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className}>
-                <rect x="3" y="3" width="18" height="18" rx="2"/>
-                <path d="M9 8l3-3 3 3"/>
-                <path d="M9 16l3 3 3-3"/>
-                <line x1="12" y1="5" x2="12" y2="19"/>
-            </svg>
-        );
-
-        const LightbulbIcon = ({ size = 24, className = "" }) => (
-            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className}>
-                <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/>
-                <path d="M9 18h6"/>
-                <path d="M10 22h4"/>
-            </svg>
-        );
-
-        const DownloadIcon = ({ size = 24, className = "" }) => (
-            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className}>
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                <polyline points="7,10 12,15 17,10"/>
-                <line x1="12" y1="15" x2="12" y2="3"/>
-            </svg>
-        );
-
-        const CalendarIcon = ({ size = 24, className = "" }) => (
-            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className}>
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                <line x1="16" y1="2" x2="16" y2="6"/>
-                <line x1="8" y1="2" x2="8" y2="6"/>
-                <line x1="3" y1="10" x2="21" y2="10"/>
-            </svg>
-        );
-
-        const ClockIcon = ({ size = 24, className = "" }) => (
-            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className}>
-                <circle cx="12" cy="12" r="10"/>
-                <polyline points="12,6 12,12 16,14"/>
-            </svg>
-        );
-
-        const TrendingUpIcon = ({ size = 24, className = "" }) => (
-            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className}>
-                <polyline points="22,7 13.5,15.5 8.5,10.5 2,17"/>
-                <polyline points="16,7 22,7 22,13"/>
-            </svg>
-        );
-
-        const BarChart3Icon = ({ size = 24, className = "" }) => (
-            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className}>
-                <line x1="12" y1="20" x2="12" y2="10"/>
-                <line x1="18" y1="20" x2="18" y2="4"/>
-                <line x1="6" y1="20" x2="6" y2="16"/>
-            </svg>
-        );
-
-        const Trash2Icon = ({ size = 24, className = "" }) => (
-            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className}>
-                <polyline points="3,6 5,6 21,6"/>
-                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
-                <line x1="10" y1="11" x2="10" y2="17"/>
-                <line x1="14" y1="11" x2="14" y2="17"/>
-            </svg>
-        );
-
-        const EditIcon = ({ size = 24, className = "" }) => (
-            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className}>
-                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-            </svg>
-        );
+        const { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } = Recharts;
 
         const VehicleTracker = () => {
             const [data, setData] = useState(() => {
@@ -136,39 +51,26 @@
             const [editingEvent, setEditingEvent] = useState(null);
             const today = new Date().toISOString().split('T')[0];
 
-            // Save data to localStorage whenever it changes
             useEffect(() => {
                 localStorage.setItem('vehicleTrackerData', JSON.stringify(data));
             }, [data]);
 
-            // Register service worker for PWA
             useEffect(() => {
                 if ('serviceWorker' in navigator) {
                     const swCode = `
                         const CACHE_NAME = 'vehicle-tracker-v1';
-                        const urlsToCache = ['/'];
-                        
                         self.addEventListener('install', event => {
-                            event.waitUntil(
-                                caches.open(CACHE_NAME)
-                                    .then(cache => cache.addAll(urlsToCache))
-                            );
+                            event.waitUntil(caches.open(CACHE_NAME));
                         });
-                        
                         self.addEventListener('fetch', event => {
                             event.respondWith(
-                                caches.match(event.request)
-                                    .then(response => response || fetch(event.request))
+                                caches.match(event.request).then(response => response || fetch(event.request))
                             );
                         });
                     `;
-                    
                     const blob = new Blob([swCode], { type: 'application/javascript' });
                     const swUrl = URL.createObjectURL(blob);
-                    
-                    navigator.serviceWorker.register(swUrl)
-                        .then(() => console.log('SW registered'))
-                        .catch(err => console.log('SW registration failed'));
+                    navigator.serviceWorker.register(swUrl).catch(() => {});
                 }
             }, []);
 
@@ -290,412 +192,611 @@
                 ];
             };
 
-            const renderEventItem = (event, index, category, icon, colorClass) => {
+            const renderEventItem = (event, index, category, iconColor) => {
                 const isEditing = editingEvent === `${category}-${index}`;
                 
-                return (
-                    <div key={index} className="flex items-center justify-between bg-slate-700 rounded-lg p-3 group">
-                        <div className="flex items-center gap-3">
-                            {icon}
-                            <span className="capitalize">{category} {event.type}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                            {isEditing ? (
-                                <input
-                                    type="time"
-                                    value={event.time}
-                                    onChange={(e) => updateEventTime(category, index, e.target.value)}
-                                    onBlur={() => setEditingEvent(null)}
-                                    onKeyDown={(e) => e.key === 'Enter' && setEditingEvent(null)}
-                                    className="time-input"
-                                    autoFocus
-                                />
-                            ) : (
-                                <span 
-                                    className="text-slate-300 text-sm cursor-pointer hover:text-blue-400"
-                                    onClick={() => setEditingEvent(`${category}-${index}`)}
-                                >
-                                    {event.time}
-                                </span>
-                            )}
-                            <button
-                                onClick={() => setEditingEvent(`${category}-${index}`)}
-                                className="opacity-0 group-hover:opacity-100 p-1 text-blue-400 hover:bg-blue-400/20 rounded transition-all"
-                            >
-                                <EditIcon size={14} />
-                            </button>
-                            <button
-                                onClick={() => deleteEvent(category, index)}
-                                className="opacity-0 group-hover:opacity-100 p-1 text-red-400 hover:bg-red-400/20 rounded transition-all"
-                            >
-                                <Trash2Icon size={14} />
-                            </button>
-                        </div>
-                    </div>
-                );
+                return React.createElement('div', {
+                    key: index,
+                    className: "flex items-center justify-between bg-slate-700 rounded-lg p-3 group"
+                }, [
+                    React.createElement('div', {
+                        key: 'content',
+                        className: "flex items-center gap-3"
+                    }, [
+                        React.createElement('div', {
+                            key: 'icon',
+                            className: `w-4 h-4 rounded-full ${iconColor}`
+                        }),
+                        React.createElement('span', {
+                            key: 'text',
+                            className: "capitalize"
+                        }, `${category} ${event.type}`)
+                    ]),
+                    React.createElement('div', {
+                        key: 'controls',
+                        className: "flex items-center gap-2"
+                    }, [
+                        isEditing ? 
+                            React.createElement('input', {
+                                key: 'input',
+                                type: 'time',
+                                value: event.time,
+                                onChange: (e) => updateEventTime(category, index, e.target.value),
+                                onBlur: () => setEditingEvent(null),
+                                onKeyDown: (e) => e.key === 'Enter' && setEditingEvent(null),
+                                className: "time-input",
+                                autoFocus: true
+                            }) :
+                            React.createElement('span', {
+                                key: 'time',
+                                className: "text-slate-300 text-sm cursor-pointer hover:text-blue-400",
+                                onClick: () => setEditingEvent(`${category}-${index}`)
+                            }, event.time),
+                        React.createElement('button', {
+                            key: 'edit',
+                            onClick: () => setEditingEvent(`${category}-${index}`),
+                            className: "opacity-0 group-hover:opacity-100 p-1 text-blue-400 hover:bg-blue-400/20 rounded transition-all"
+                        }, '✏️'),
+                        React.createElement('button', {
+                            key: 'delete',
+                            onClick: () => deleteEvent(category, index),
+                            className: "opacity-0 group-hover:opacity-100 p-1 text-red-400 hover:bg-red-400/20 rounded transition-all"
+                        }, '🗑️')
+                    ])
+                ]);
             };
 
             const todayData = getTodayData();
             const last7Days = getLast7DaysData();
             const statusData = getActivityStatusData();
 
-            return (
-                <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 text-white">
-                    {/* Header */}
-                    <div className="bg-slate-800/50 backdrop-blur-sm border-b border-slate-700 sticky top-0 z-10">
-                        <div className="max-w-md mx-auto px-4 py-4">
-                            <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-2">
-                                    <CarIcon className="text-blue-400" size={24} />
-                                    <h1 className="text-xl font-bold">Vehicle Tracker</h1>
-                                </div>
-                                <button
-                                    onClick={exportData}
-                                    className="p-2 bg-green-600 hover:bg-green-700 rounded-lg transition-colors"
-                                >
-                                    <DownloadIcon size={20} />
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+            return React.createElement('div', {
+                className: "min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 text-white"
+            }, [
+                // Header
+                React.createElement('div', {
+                    key: 'header',
+                    className: "bg-slate-800/50 backdrop-blur-sm border-b border-slate-700 sticky top-0 z-10"
+                }, 
+                    React.createElement('div', {
+                        className: "max-w-md mx-auto px-4 py-4"
+                    },
+                        React.createElement('div', {
+                            className: "flex items-center justify-between"
+                        }, [
+                            React.createElement('div', {
+                                key: 'title',
+                                className: "flex items-center gap-2"
+                            }, [
+                                React.createElement('span', { key: 'icon' }, '🚗'),
+                                React.createElement('h1', {
+                                    key: 'text',
+                                    className: "text-xl font-bold"
+                                }, 'Vehicle Tracker')
+                            ]),
+                            React.createElement('button', {
+                                key: 'export',
+                                onClick: exportData,
+                                className: "p-2 bg-green-600 hover:bg-green-700 rounded-lg transition-colors"
+                            }, '📥')
+                        ])
+                    )
+                ),
 
-                    <div className="max-w-md mx-auto px-4 py-6">
-                        {/* View Toggle */}
-                        <div className="flex bg-slate-800 rounded-lg p-1 mb-6">
-                            <button
-                                onClick={() => setCurrentView('today')}
-                                className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
-                                    currentView === 'today' ? 'bg-blue-600 text-white' : 'text-slate-400'
-                                }`}
-                            >
-                                Today
-                            </button>
-                            <button
-                                onClick={() => setCurrentView('dashboard')}
-                                className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
-                                    currentView === 'dashboard' ? 'bg-blue-600 text-white' : 'text-slate-400'
-                                }`}
-                            >
-                                Dashboard
-                            </button>
-                        </div>
+                // Main Content
+                React.createElement('div', {
+                    key: 'main',
+                    className: "max-w-md mx-auto px-4 py-6"
+                }, [
+                    // View Toggle
+                    React.createElement('div', {
+                        key: 'toggle',
+                        className: "flex bg-slate-800 rounded-lg p-1 mb-6"
+                    }, [
+                        React.createElement('button', {
+                            key: 'today',
+                            onClick: () => setCurrentView('today'),
+                            className: `flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
+                                currentView === 'today' ? 'bg-blue-600 text-white' : 'text-slate-400'
+                            }`
+                        }, 'Today'),
+                        React.createElement('button', {
+                            key: 'dashboard',
+                            onClick: () => setCurrentView('dashboard'),
+                            className: `flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
+                                currentView === 'dashboard' ? 'bg-blue-600 text-white' : 'text-slate-400'
+                            }`
+                        }, 'Dashboard')
+                    ]),
 
-                        {currentView === 'today' && (
-                            <>
-                                {/* Current Date */}
-                                <div className="bg-slate-800/50 rounded-xl p-4 mb-6">
-                                    <div className="flex items-center gap-2 mb-2">
-                                        <CalendarIcon className="text-blue-400" size={20} />
-                                        <span className="text-slate-300">Today</span>
-                                    </div>
-                                    <div className="text-2xl font-bold">
-                                        {new Date().toLocaleDateString('en', { 
-                                            weekday: 'long', 
-                                            year: 'numeric', 
-                                            month: 'long', 
-                                            day: 'numeric' 
-                                        })}
-                                    </div>
-                                </div>
+                    // Today View
+                    currentView === 'today' && React.createElement('div', { key: 'today-view' }, [
+                        // Date
+                        React.createElement('div', {
+                            key: 'date',
+                            className: "bg-slate-800/50 rounded-xl p-4 mb-6"
+                        }, [
+                            React.createElement('div', {
+                                key: 'date-header',
+                                className: "flex items-center gap-2 mb-2"
+                            }, [
+                                React.createElement('span', { key: 'icon' }, '📅'),
+                                React.createElement('span', {
+                                    key: 'text',
+                                    className: "text-slate-300"
+                                }, 'Today')
+                            ]),
+                            React.createElement('div', {
+                                key: 'date-text',
+                                className: "text-2xl font-bold"
+                            }, new Date().toLocaleDateString('en', { 
+                                weekday: 'long', 
+                                year: 'numeric', 
+                                month: 'long', 
+                                day: 'numeric' 
+                            }))
+                        ]),
 
-                                {/* Vehicle Tracking */}
-                                <div className="space-y-4 mb-6">
-                                    <h2 className="text-lg font-semibold flex items-center gap-2">
-                                        <CarIcon className="text-blue-400" size={20} />
-                                        Vehicle Tracking
-                                    </h2>
-                                    
-                                    <div className="grid grid-cols-2 gap-3">
-                                        <button
-                                            onClick={() => logEvent('in', 'vehicle')}
-                                            className="bg-green-600 hover:bg-green-700 text-white p-4 rounded-xl transition-colors flex flex-col items-center gap-2"
-                                        >
-                                            <CarIcon size={24} />
-                                            <span className="font-medium">Car In</span>
-                                        </button>
-                                        
-                                        <button
-                                            onClick={() => logEvent('out', 'vehicle')}
-                                            className="bg-red-600 hover:bg-red-700 text-white p-4 rounded-xl transition-colors flex flex-col items-center gap-2"
-                                        >
-                                            <CarIcon size={24} />
-                                            <span className="font-medium">Car Out</span>
-                                        </button>
-                                    </div>
-                                </div>
+                        // Vehicle Tracking
+                        React.createElement('div', {
+                            key: 'vehicle',
+                            className: "space-y-4 mb-6"
+                        }, [
+                            React.createElement('h2', {
+                                key: 'title',
+                                className: "text-lg font-semibold flex items-center gap-2"
+                            }, [
+                                React.createElement('span', { key: 'icon' }, '🚗'),
+                                'Vehicle Tracking'
+                            ]),
+                            React.createElement('div', {
+                                key: 'buttons',
+                                className: "grid grid-cols-2 gap-3"
+                            }, [
+                                React.createElement('button', {
+                                    key: 'in',
+                                    onClick: () => logEvent('in', 'vehicle'),
+                                    className: "bg-green-600 hover:bg-green-700 text-white p-4 rounded-xl transition-colors flex flex-col items-center gap-2"
+                                }, [
+                                    React.createElement('span', { key: 'icon' }, '🚗'),
+                                    React.createElement('span', {
+                                        key: 'text',
+                                        className: "font-medium"
+                                    }, 'Car In')
+                                ]),
+                                React.createElement('button', {
+                                    key: 'out',
+                                    onClick: () => logEvent('out', 'vehicle'),
+                                    className: "bg-red-600 hover:bg-red-700 text-white p-4 rounded-xl transition-colors flex flex-col items-center gap-2"
+                                }, [
+                                    React.createElement('span', { key: 'icon' }, '🚗'),
+                                    React.createElement('span', {
+                                        key: 'text',
+                                        className: "font-medium"
+                                    }, 'Car Out')
+                                ])
+                            ])
+                        ]),
 
-                                {/* Elevator Tracking */}
-                                <div className="space-y-4 mb-6">
-                                    <h2 className="text-lg font-semibold flex items-center gap-2">
-                                        <ElevatorIcon className="text-purple-400" size={20} />
-                                        Elevator Tracking
-                                    </h2>
-                                    
-                                    <div className="grid grid-cols-2 gap-3">
-                                        <button
-                                            onClick={() => logEvent('in', 'elevator')}
-                                            className="bg-purple-600 hover:bg-purple-700 text-white p-4 rounded-xl transition-colors flex flex-col items-center gap-2"
-                                        >
-                                            <ElevatorIcon size={24} />
-                                            <span className="font-medium">Elevator In</span>
-                                        </button>
-                                        
-                                        <button
-                                            onClick={() => logEvent('out', 'elevator')}
-                                            className="bg-orange-600 hover:bg-orange-700 text-white p-4 rounded-xl transition-colors flex flex-col items-center gap-2"
-                                        >
-                                            <ElevatorIcon size={24} />
-                                            <span className="font-medium">Elevator Out</span>
-                                        </button>
-                                    </div>
-                                </div>
+                        // Elevator Tracking
+                        React.createElement('div', {
+                            key: 'elevator',
+                            className: "space-y-4 mb-6"
+                        }, [
+                            React.createElement('h2', {
+                                key: 'title',
+                                className: "text-lg font-semibold flex items-center gap-2"
+                            }, [
+                                React.createElement('span', { key: 'icon' }, '🛗'),
+                                'Elevator Tracking'
+                            ]),
+                            React.createElement('div', {
+                                key: 'buttons',
+                                className: "grid grid-cols-2 gap-3"
+                            }, [
+                                React.createElement('button', {
+                                    key: 'in',
+                                    onClick: () => logEvent('in', 'elevator'),
+                                    className: "bg-purple-600 hover:bg-purple-700 text-white p-4 rounded-xl transition-colors flex flex-col items-center gap-2"
+                                }, [
+                                    React.createElement('span', { key: 'icon' }, '🛗'),
+                                    React.createElement('span', {
+                                        key: 'text',
+                                        className: "font-medium"
+                                    }, 'Elevator In')
+                                ]),
+                                React.createElement('button', {
+                                    key: 'out',
+                                    onClick: () => logEvent('out', 'elevator'),
+                                    className: "bg-orange-600 hover:bg-orange-700 text-white p-4 rounded-xl transition-colors flex flex-col items-center gap-2"
+                                }, [
+                                    React.createElement('span', { key: 'icon' }, '🛗'),
+                                    React.createElement('span', {
+                                        key: 'text',
+                                        className: "font-medium"
+                                    }, 'Elevator Out')
+                                ])
+                            ])
+                        ]),
 
-                                {/* Evening Light */}
-                                <div className="space-y-4 mb-6">
-                                    <h3 className="text-lg font-semibold flex items-center gap-2">
-                                        <LightbulbIcon className="text-yellow-400" size={20} />
-                                        Evening Light
-                                    </h3>
-                                    
-                                    <div className="grid grid-cols-2 gap-3">
-                                        <button
-                                            onClick={() => toggleEveningLight('on')}
-                                            className={`p-4 rounded-xl transition-colors flex flex-col items-center gap-2 ${
-                                                todayData.eveningLight.status === 'on' 
-                                                    ? 'bg-yellow-600 text-white' 
-                                                    : 'bg-slate-700 hover:bg-slate-600 text-slate-300'
-                                            }`}
-                                        >
-                                            <LightbulbIcon size={24} />
-                                            <span className="font-medium">Light On</span>
-                                        </button>
-                                        
-                                        <button
-                                            onClick={() => toggleEveningLight('off')}
-                                            className={`p-4 rounded-xl transition-colors flex flex-col items-center gap-2 ${
-                                                todayData.eveningLight.status === 'off' 
-                                                    ? 'bg-slate-600 text-white' 
-                                                    : 'bg-slate-700 hover:bg-slate-600 text-slate-300'
-                                            }`}
-                                        >
-                                            <LightbulbIcon size={24} />
-                                            <span className="font-medium">Light Off</span>
-                                        </button>
-                                    </div>
-                                </div>
+                        // Evening Light
+                        React.createElement('div', {
+                            key: 'light',
+                            className: "space-y-4 mb-6"
+                        }, [
+                            React.createElement('h3', {
+                                key: 'title',
+                                className: "text-lg font-semibold flex items-center gap-2"
+                            }, [
+                                React.createElement('span', { key: 'icon' }, '💡'),
+                                'Evening Light'
+                            ]),
+                            React.createElement('div', {
+                                key: 'buttons',
+                                className: "grid grid-cols-2 gap-3"
+                            }, [
+                                React.createElement('button', {
+                                    key: 'on',
+                                    onClick: () => toggleEveningLight('on'),
+                                    className: `p-4 rounded-xl transition-colors flex flex-col items-center gap-2 ${
+                                        todayData.eveningLight.status === 'on' 
+                                            ? 'bg-yellow-600 text-white' 
+                                            : 'bg-slate-700 hover:bg-slate-600 text-slate-300'
+                                    }`
+                                }, [
+                                    React.createElement('span', { key: 'icon' }, '💡'),
+                                    React.createElement('span', {
+                                        key: 'text',
+                                        className: "font-medium"
+                                    }, 'Light On')
+                                ]),
+                                React.createElement('button', {
+                                    key: 'off',
+                                    onClick: () => toggleEveningLight('off'),
+                                    className: `p-4 rounded-xl transition-colors flex flex-col items-center gap-2 ${
+                                        todayData.eveningLight.status === 'off' 
+                                            ? 'bg-slate-600 text-white' 
+                                            : 'bg-slate-700 hover:bg-slate-600 text-slate-300'
+                                    }`
+                                }, [
+                                    React.createElement('span', { key: 'icon' }, '💡'),
+                                    React.createElement('span', {
+                                        key: 'text',
+                                        className: "font-medium"
+                                    }, 'Light Off')
+                                ])
+                            ])
+                        ]),
 
-                                {/* Today's Activity */}
-                                <div className="bg-slate-800/50 rounded-xl p-4">
-                                    <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
-                                        <ClockIcon className="text-blue-400" size={20} />
-                                        Today's Activity
-                                    </h3>
-                                    
-                                    <div className="space-y-2 mb-4">
-                                        {/* Vehicle Events */}
-                                        {todayData.vehicleEvents.map((event, index) => 
-                                            renderEventItem(
-                                                event, 
-                                                index, 
-                                                'vehicle', 
-                                                <CarIcon className={event.type === 'in' ? 'text-green-400' : 'text-red-400'} size={18} />,
-                                                event.type === 'in' ? 'text-green-400' : 'text-red-400'
-                                            )
-                                        )}
-                                        
-                                        {/* Elevator Events */}
-                                        {todayData.elevatorEvents.map((event, index) => 
-                                            renderEventItem(
-                                                event, 
-                                                index, 
-                                                'elevator', 
-                                                <ElevatorIcon className={event.type === 'in' ? 'text-purple-400' : 'text-orange-400'} size={18} />,
-                                                event.type === 'in' ? 'text-purple-400' : 'text-orange-400'
-                                            )
-                                        )}
-                                        
-                                        {todayData.vehicleEvents.length === 0 && todayData.elevatorEvents.length === 0 && (
-                                            <p className="text-slate-400 text-sm">No activity recorded today</p>
-                                        )}
-                                    </div>
+                        // Today's Activity
+                        React.createElement('div', {
+                            key: 'activity',
+                            className: "bg-slate-800/50 rounded-xl p-4"
+                        }, [
+                            React.createElement('h3', {
+                                key: 'title',
+                                className: "text-lg font-semibold mb-3 flex items-center gap-2"
+                            }, [
+                                React.createElement('span', { key: 'icon' }, '🕐'),
+                                "Today's Activity"
+                            ]),
+                            React.createElement('div', {
+                                key: 'events',
+                                className: "space-y-2 mb-4"
+                            }, [
+                                ...todayData.vehicleEvents.map((event, index) => 
+                                    renderEventItem(event, index, 'vehicle', event.type === 'in' ? 'bg-green-400' : 'bg-red-400')
+                                ),
+                                ...todayData.elevatorEvents.map((event, index) => 
+                                    renderEventItem(event, index, 'elevator', event.type === 'in' ? 'bg-purple-400' : 'bg-orange-400')
+                                ),
+                                (todayData.vehicleEvents.length === 0 && todayData.elevatorEvents.length === 0) &&
+                                React.createElement('p', {
+                                    key: 'empty',
+                                    className: "text-slate-400 text-sm"
+                                }, 'No activity recorded today')
+                            ]),
+                            todayData.eveningLight.status !== 'not_recorded' &&
+                            React.createElement('div', {
+                                key: 'light-status',
+                                className: "bg-slate-700 rounded-lg p-3 group"
+                            }, 
+                                React.createElement('div', {
+                                    className: "flex items-center justify-between"
+                                }, [
+                                    React.createElement('div', {
+                                        key: 'content',
+                                        className: "flex items-center gap-3"
+                                    }, [
+                                        React.createElement('span', { key: 'icon' }, '💡'),
+                                        React.createElement('span', {
+                                            key: 'text'
+                                        }, `Evening Light ${todayData.eveningLight.status}`)
+                                    ]),
+                                    React.createElement('div', {
+                                        key: 'controls',
+                                        className: "flex items-center gap-2"
+                                    }, [
+                                        React.createElement('span', {
+                                            key: 'time',
+                                            className: "text-slate-300 text-sm"
+                                        }, todayData.eveningLight.time),
+                                        React.createElement('button', {
+                                            key: 'delete',
+                                            onClick: clearEveningLight,
+                                            className: "opacity-0 group-hover:opacity-100 p-1 text-red-400 hover:bg-red-400/20 rounded transition-all"
+                                        }, '🗑️')
+                                    ])
+                                ])
+                            )
+                        ])
+                    ]),
 
-                                    {/* Evening Light Status */}
-                                    {todayData.eveningLight.status !== 'not_recorded' && (
-                                        <div className="bg-slate-700 rounded-lg p-3 group">
-                                            <div className="flex items-center justify-between">
-                                                <div className="flex items-center gap-3">
-                                                    <LightbulbIcon className="text-yellow-400" size={18} />
-                                                    <span>Evening Light {todayData.eveningLight.status}</span>
-                                                </div>
-                                                <div className="flex items-center gap-2">
-                                                    <span className="text-slate-300 text-sm">{todayData.eveningLight.time}</span>
-                                                    <button
-                                                        onClick={clearEveningLight}
-                                                        className="opacity-0 group-hover:opacity-100 p-1 text-red-400 hover:bg-red-400/20 rounded transition-all"
-                                                    >
-                                                        <Trash2Icon size={14} />
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )}
-                                </div>
-                            </>
-                        )}
+                    // Dashboard View
+                    currentView === 'dashboard' && React.createElement('div', { key: 'dashboard-view' }, [
+                        // Activity Chart
+                        React.createElement('div', {
+                            key: 'chart1',
+                            className: "bg-slate-800/50 rounded-xl p-4 mb-6"
+                        }, [
+                            React.createElement('h3', {
+                                key: 'title',
+                                className: "text-lg font-semibold mb-4 flex items-center gap-2"
+                            }, [
+                                React.createElement('span', { key: 'icon' }, '📈'),
+                                '7-Day Activity'
+                            ]),
+                            React.createElement('div', {
+                                key: 'chart',
+                                className: "h-48"
+                            },
+                                React.createElement(ResponsiveContainer, {
+                                    width: "100%",
+                                    height: "100%"
+                                },
+                                    React.createElement(BarChart, {
+                                        data: last7Days
+                                    }, [
+                                        React.createElement(CartesianGrid, {
+                                            key: 'grid',
+                                            strokeDasharray: "3 3",
+                                            stroke: "#374151"
+                                        }),
+                                        React.createElement(XAxis, {
+                                            key: 'x',
+                                            dataKey: "shortDate",
+                                            stroke: "#9ca3af",
+                                            fontSize: 12,
+                                            angle: -45,
+                                            textAnchor: "end",
+                                            height: 60
+                                        }),
+                                        React.createElement(YAxis, {
+                                            key: 'y',
+                                            stroke: "#9ca3af",
+                                            fontSize: 12
+                                        }),
+                                        React.createElement(Tooltip, {
+                                            key: 'tooltip',
+                                            contentStyle: {
+                                                backgroundColor: '#1f2937',
+                                                border: '1px solid #374151',
+                                                borderRadius: '8px'
+                                            }
+                                        }),
+                                        React.createElement(Bar, {
+                                            key: 'vehicle',
+                                            dataKey: "vehicleTrips",
+                                            fill: "#3b82f6",
+                                            name: "Vehicle"
+                                        }),
+                                        React.createElement(Bar, {
+                                            key: 'elevator',
+                                            dataKey: "elevatorTrips",
+                                            fill: "#8b5cf6",
+                                            name: "Elevator"
+                                        })
+                                    ])
+                                )
+                            )
+                        ]),
 
-                        {currentView === 'dashboard' && (
-                            <>
-                                {/* Combined Activity Chart */}
-                                <div className="bg-slate-800/50 rounded-xl p-4 mb-6">
-                                    <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                                        <TrendingUpIcon className="text-blue-400" size={20} />
-                                        7-Day Activity
-                                    </h3>
-                                    <div className="h-48">
-                                        <ResponsiveContainer width="100%" height="100%">
-                                            <BarChart data={last7Days}>
-                                                <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
-                                                <XAxis 
-                                                    dataKey="shortDate" 
-                                                    stroke="#9ca3af" 
-                                                    fontSize={12}
-                                                    angle={-45}
-                                                    textAnchor="end"
-                                                    height={60}
-                                                />
-                                                <YAxis stroke="#9ca3af" fontSize={12} />
-                                                <Tooltip 
-                                                    contentStyle={{ 
-                                                        backgroundColor: '#1f2937', 
-                                                        border: '1px solid #374151',
-                                                        borderRadius: '8px'
-                                                    }}
-                                                />
-                                                <Bar dataKey="vehicleTrips" fill="#3b82f6" name="Vehicle" />
-                                                <Bar dataKey="elevatorTrips" fill="#8b5cf6" name="Elevator" />
-                                            </BarChart>
-                                        </ResponsiveContainer>
-                                    </div>
-                                </div>
+                        // Light Chart
+                        React.createElement('div', {
+                            key: 'chart2',
+                            className: "bg-slate-800/50 rounded-xl p-4 mb-6"
+                        }, [
+                            React.createElement('h3', {
+                                key: 'title',
+                                className: "text-lg font-semibold mb-4 flex items-center gap-2"
+                            }, [
+                                React.createElement('span', { key: 'icon' }, '💡'),
+                                'Evening Light Trend'
+                            ]),
+                            React.createElement('div', {
+                                key: 'chart',
+                                className: "h-48"
+                            },
+                                React.createElement(ResponsiveContainer, {
+                                    width: "100%",
+                                    height: "100%"
+                                },
+                                    React.createElement(BarChart, {
+                                        data: last7Days
+                                    }, [
+                                        React.createElement(CartesianGrid, {
+                                            key: 'grid',
+                                            strokeDasharray: "3 3",
+                                            stroke: "#374151"
+                                        }),
+                                        React.createElement(XAxis, {
+                                            key: 'x',
+                                            dataKey: "shortDate",
+                                            stroke: "#9ca3af",
+                                            fontSize: 12,
+                                            angle: -45,
+                                            textAnchor: "end",
+                                            height: 60
+                                        }),
+                                        React.createElement(YAxis, {
+                                            key: 'y',
+                                            stroke: "#9ca3af",
+                                            fontSize: 12
+                                        }),
+                                        React.createElement(Tooltip, {
+                                            key: 'tooltip',
+                                            contentStyle: {
+                                                backgroundColor: '#1f2937',
+                                                border: '1px solid #374151',
+                                                borderRadius: '8px'
+                                            }
+                                        }),
+                                        React.createElement(Bar, {
+                                            key: 'on',
+                                            dataKey: "lightOn",
+                                            fill: "#eab308",
+                                            name: "Light On"
+                                        }),
+                                        React.createElement(Bar, {
+                                            key: 'off',
+                                            dataKey: "lightOff",
+                                            fill: "#64748b",
+                                            name: "Light Off"
+                                        })
+                                    ])
+                                )
+                            )
+                        ]),
 
-                                {/* Evening Light Trend */}
-                                <div className="bg-slate-800/50 rounded-xl p-4 mb-6">
-                                    <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                                        <LightbulbIcon className="text-yellow-400" size={20} />
-                                        Evening Light Trend
-                                    </h3>
-                                    <div className="h-48">
-                                        <ResponsiveContainer width="100%" height="100%">
-                                            <BarChart data={last7Days}>
-                                                <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
-                                                <XAxis 
-                                                    dataKey="shortDate" 
-                                                    stroke="#9ca3af" 
-                                                    fontSize={12}
-                                                    angle={-45}
-                                                    textAnchor="end"
-                                                    height={60}
-                                                />
-                                                <YAxis stroke="#9ca3af" fontSize={12} />
-                                                <Tooltip 
-                                                    contentStyle={{ 
-                                                        backgroundColor: '#1f2937', 
-                                                        border: '1px solid #374151',
-                                                        borderRadius: '8px'
-                                                    }}
-                                                />
-                                                <Bar dataKey="lightOn" fill="#eab308" name="Light On" />
-                                                <Bar dataKey="lightOff" fill="#64748b" name="Light Off" />
-                                            </BarChart>
-                                        </ResponsiveContainer>
-                                    </div>
-                                </div>
+                        // Pie Chart
+                        React.createElement('div', {
+                            key: 'chart3',
+                            className: "bg-slate-800/50 rounded-xl p-4 mb-6"
+                        }, [
+                            React.createElement('h3', {
+                                key: 'title',
+                                className: "text-lg font-semibold mb-4 flex items-center gap-2"
+                            }, [
+                                React.createElement('span', { key: 'icon' }, '📊'),
+                                'Activity Overview'
+                            ]),
+                            React.createElement('div', {
+                                key: 'chart',
+                                className: "h-48"
+                            },
+                                React.createElement(ResponsiveContainer, {
+                                    width: "100%",
+                                    height: "100%"
+                                },
+                                    React.createElement(PieChart, {}, 
+                                        React.createElement(Pie, {
+                                            data: statusData,
+                                            cx: "50%",
+                                            cy: "50%",
+                                            innerRadius: 40,
+                                            outerRadius: 80,
+                                            paddingAngle: 5,
+                                            dataKey: "value"
+                                        }, statusData.map((entry, index) =>
+                                            React.createElement(Cell, {
+                                                key: `cell-${index}`,
+                                                fill: entry.color
+                                            })
+                                        ))
+                                    )
+                                )
+                            ),
+                            React.createElement('div', {
+                                key: 'legend',
+                                className: "flex justify-center gap-4 mt-2"
+                            }, statusData.map((entry, index) =>
+                                React.createElement('div', {
+                                    key: index,
+                                    className: "flex items-center gap-2"
+                                }, [
+                                    React.createElement('div', {
+                                        key: 'color',
+                                        className: "w-3 h-3 rounded-full",
+                                        style: { backgroundColor: entry.color }
+                                    }),
+                                    React.createElement('span', {
+                                        key: 'text',
+                                        className: "text-sm text-slate-300"
+                                    }, entry.name)
+                                ])
+                            ))
+                        ]),
 
-                                {/* Activity Status Pie Chart */}
-                                <div className="bg-slate-800/50 rounded-xl p-4 mb-6">
-                                    <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                                        <BarChart3Icon className="text-green-400" size={20} />
-                                        Activity Overview
-                                    </h3>
-                                    <div className="h-48">
-                                        <ResponsiveContainer width="100%" height="100%">
-                                            <PieChart>
-                                                <Pie
-                                                    data={statusData}
-                                                    cx="50%"
-                                                    cy="50%"
-                                                    innerRadius={40}
-                                                    outerRadius={80}
-                                                    paddingAngle={5}
-                                                    dataKey="value"
-                                                >
-                                                    {statusData.map((entry, index) => (
-                                                        <Cell key={`cell-${index}`} fill={entry.color} />
-                                                    ))}
-                                                </Pie>
-                                                <Tooltip 
-                                                    contentStyle={{ 
-                                                        backgroundColor: '#1f2937', 
-                                                        border: '1px solid #374151',
-                                                        borderRadius: '8px'
-                                                    }}
-                                                />
-                                            </PieChart>
-                                        </ResponsiveContainer>
-                                    </div>
-                                    <div className="flex justify-center gap-4 mt-2">
-                                        {statusData.map((entry, index) => (
-                                            <div key={index} className="flex items-center gap-2">
-                                                <div 
-                                                    className="w-3 h-3 rounded-full" 
-                                                    style={{ backgroundColor: entry.color }}
-                                                ></div>
-                                                <span className="text-sm text-slate-300">{entry.name}</span>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
+                        // Stats
+                        React.createElement('div', {
+                            key: 'stats1',
+                            className: "grid grid-cols-2 gap-4 mb-4"
+                        }, [
+                            React.createElement('div', {
+                                key: 'vehicle',
+                                className: "bg-slate-800/50 rounded-xl p-4"
+                            }, [
+                                React.createElement('div', {
+                                    key: 'number',
+                                    className: "text-2xl font-bold text-blue-400"
+                                }, last7Days.reduce((sum, day) => sum + day.vehicleTrips, 0)),
+                                React.createElement('div', {
+                                    key: 'label',
+                                    className: "text-slate-300 text-sm"
+                                }, 'Vehicle Trips (7 days)')
+                            ]),
+                            React.createElement('div', {
+                                key: 'elevator',
+                                className: "bg-slate-800/50 rounded-xl p-4"
+                            }, [
+                                React.createElement('div', {
+                                    key: 'number',
+                                    className: "text-2xl font-bold text-purple-400"
+                                }, last7Days.reduce((sum, day) => sum + day.elevatorTrips, 0)),
+                                React.createElement('div', {
+                                    key: 'label',
+                                    className: "text-slate-300 text-sm"
+                                }, 'Elevator Trips (7 days)')
+                            ])
+                        ]),
 
-                                {/* Quick Stats */}
-                                <div className="grid grid-cols-2 gap-4 mb-4">
-                                    <div className="bg-slate-800/50 rounded-xl p-4">
-                                        <div className="text-2xl font-bold text-blue-400">
-                                            {last7Days.reduce((sum, day) => sum + day.vehicleTrips, 0)}
-                                        </div>
-                                        <div className="text-slate-300 text-sm">Vehicle Trips (7 days)</div>
-                                    </div>
-                                    
-                                    <div className="bg-slate-800/50 rounded-xl p-4">
-                                        <div className="text-2xl font-bold text-purple-400">
-                                            {last7Days.reduce((sum, day) => sum + day.elevatorTrips, 0)}
-                                        </div>
-                                        <div className="text-slate-300 text-sm">Elevator Trips (7 days)</div>
-                                    </div>
-                                </div>
-
-                                <div className="grid grid-cols-2 gap-4">
-                                    <div className="bg-slate-800/50 rounded-xl p-4">
-                                        <div className="text-2xl font-bold text-green-400">
-                                            {last7Days.reduce((sum, day) => sum + day.totalTrips, 0)}
-                                        </div>
-                                        <div className="text-slate-300 text-sm">Total Trips (7 days)</div>
-                                    </div>
-                                    
-                                    <div className="bg-slate-800/50 rounded-xl p-4">
-                                        <div className="text-2xl font-bold text-yellow-400">
-                                            {last7Days.filter(d => d.lightOn === 1).length}
-                                        </div>
-                                        <div className="text-slate-300 text-sm">Days Light On</div>
-                                    </div>
-                                </div>
-                            </>
-                        )}
-                    </div>
-                </div>
-            );
+                        React.createElement('div', {
+                            key: 'stats2',
+                            className: "grid grid-cols-2 gap-4"
+                        }, [
+                            React.createElement('div', {
+                                key: 'total',
+                                className: "bg-slate-800/50 rounded-xl p-4"
+                            }, [
+                                React.createElement('div', {
+                                    key: 'number',
+                                    className: "text-2xl font-bold text-green-400"
+                                }, last7Days.reduce((sum, day) => sum + day.totalTrips, 0)),
+                                React.createElement('div', {
+                                    key: 'label',
+                                    className: "text-slate-300 text-sm"
+                                }, 'Total Trips (7 days)')
+                            ]),
+                            React.createElement('div', {
+                                key: 'light',
+                                className: "bg-slate-800/50 rounded-xl p-4"
+                            }, [
+                                React.createElement('div', {
+                                    key: 'number',
+                                    className: "text-2xl font-bold text-yellow-400"
+                                }, last7Days.filter(d => d.lightOn === 1).length),
+                                React.createElement('div', {
+                                    key: 'label',
+                                    className: "text-slate-300 text-sm"
+                                }, 'Days Light On')
+                            ])
+                        ])
+                    ])
+                ])
+            ]);
         };
 
-        ReactDOM.render(<VehicleTracker />, document.getElementById('root'));
+        ReactDOM.render(React.createElement(VehicleTracker), document.getElementById('root'));
     </script>
 </body>
 </html>
