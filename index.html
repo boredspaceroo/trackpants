@@ -6,21 +6,124 @@
     <meta name="theme-color" content="#1e293b">
     <title>Vehicle Tracker</title>
     
-    <!-- PWA Meta Tags -->
-    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlZlaGljbGUgVHJhY2tlciIsCiAgInNob3J0X25hbWUiOiAiVmVoaWNsZVRyYWNrZXIiLAogICJkZXNjcmlwdGlvbiI6ICJUcmFjayB2ZWhpY2xlIGFuZCBlbGV2YXRvciBtb3ZlbWVudHMgd2l0aCBldmVuaW5nIGxpZ2h0IHN0YXR1cyIsCiAgInN0YXJ0X3VybCI6ICIuLyIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzFlMjkzYiIsCiAgInRoZW1lX2NvbG9yIjogIiMxZTI5M2IiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lJSGRwWkhSb1BTSXlOREFpSUdobGFXZG9kRDBpTWpRd0lqNDhjbVZqZENCM2FXUjBhRDBpTWpRd0lpQm9aV2xuYUhROUlqSTBNQ0lnWm1sc2JEMGlJekZsTWpreVltSWlMejQ4Y0dGMGFDQmtQU0pOTVRJd0lEWXdZekF0TXpNdU1UUXRNall1T0RZdE5qQXROakF0TmpCVE9EWTJJRE0yUXpFeU1DQXlOaTQ0TmlBeE1qQWdOakJhVFRFMk1DQXhNREJqTXpNdU1UUWdNQ0EyTUNBeU5pNDROaUEyTUNBMk1ITXRNall1T0RZZ05qQXROakFnTmpCYUlpQm1hV3hzUFNKM2FHbDBaU0l2UGp3dmMzWm5QZz09SWciLAogICAgICAic2l6ZXMiOiAiMjQweDI0MCIsCiAgICAgICJ0eXBlIjogImltYWdlL3N2Zyt4bWwiCiAgICB9CiAgXQp9">
-    <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNDAiIGhlaWdodD0iMjQwIj48cmVjdCB3aWR0aD0iMjQwIiBoZWlnaHQ9IjI0MCIgZmlsbD0iIzFlMjkzYiIvPjxwYXRoIGQ9Ik0xMjAgNjBjMC0zMy4xNC0yNi44Ni02MC02MC02MFM4NiAzNiAxMjAgNjBaTTE2MCAxMDBjMzMuMTQgMCA2MCAyNi44NiA2MCA2MHMtMjYuODYgNjAtNjAgNjBaIiBmaWxsPSJ3aGl0ZSIvPjwvc3ZnPg==">
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiVmVoaWNsZSBUcmFja2VyIiwic2hvcnRfbmFtZSI6IlZlaGljbGVUcmFja2VyIiwiZGVzY3JpcHRpb24iOiJUcmFjayB2ZWhpY2xlIGFuZCBlbGV2YXRvciBtb3ZlbWVudHMiLCJzdGFydF91cmwiOiIuLyIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwiYmFja2dyb3VuZF9jb2xvciI6IiMxZTI5M2IiLCJ0aGVtZV9jb2xvciI6IiMxZTI5M2IiLCJpY29ucyI6W3sic3JjIjoiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCNGJXeHVjejBpYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01DOXpkbWNpSUhkcFpIUm9QU0l5TkRBaUlHaGxhV2RvZEQwaU1qUXdJajQ4Y21WamRDQjNhV1IwYUQwaU1qUXdJaUJvWldsbmFIUTlJakkwTUNJZ1ptbHNiRDBpSXpGbE1qa3lZbUlpTHo0OGNHRjBhQ0JrUFNKTk1USXdJRFl3WXpBdE16TXVNVFF0TWpZdU9EWXROakF0TmpBdE5qQlRPRFkyUXpNeVF6RXlNQ0F5Tmk0NE5pQXhNakFnTmpCYVRURTJNQ0F4TURCRE16TXVNVFFnTUNBMk1DQXlOaTQ0TmlBMk1DQTJNSE10TWpZdU9EWWdOakF0TmpBZ05qQmFJaUJtYVd4c1BTSjNhR2wwWlNJdlBqd3ZjM1puUGc9PSIsInNpemVzIjoiMjQweDI0MCIsInR5cGUiOiJpbWFnZS9zdmcreG1sIn1dfQ==">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
-    <!-- React and dependencies -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/recharts@2.8.0/umd/Recharts.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    
     <style>
-        .time-input {
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        .container { max-width: 400px; margin: 0 auto; padding: 20px; }
+        .header { 
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #374151;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            padding: 16px 20px;
+        }
+        .header-content { 
+            max-width: 400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .title { display: flex; align-items: center; gap: 8px; font-size: 20px; font-weight: bold; }
+        .btn { 
+            padding: 12px 16px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn:hover { transform: translateY(-1px); }
+        .btn-green { background: #16a34a; color: white; }
+        .btn-green:hover { background: #15803d; }
+        .btn-red { background: #dc2626; color: white; }
+        .btn-red:hover { background: #b91c1c; }
+        .btn-purple { background: #9333ea; color: white; }
+        .btn-purple:hover { background: #7c3aed; }
+        .btn-orange { background: #ea580c; color: white; }
+        .btn-orange:hover { background: #c2410c; }
+        .btn-yellow { background: #eab308; color: white; }
+        .btn-yellow:hover { background: #ca8a04; }
+        .btn-gray { background: #475569; color: #cbd5e1; }
+        .btn-gray:hover { background: #334155; }
+        .btn-active { background: #3b82f6 !important; color: white !important; }
+        .btn-small { padding: 4px 8px; font-size: 12px; }
+        .card { 
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .section-title { 
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .toggle { 
+            display: flex;
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 4px;
+            margin-bottom: 24px;
+        }
+        .toggle button { 
+            flex: 1;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            background: transparent;
+            color: #94a3b8;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .event-item { 
+            background: #374151;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        .event-item:hover .event-controls { opacity: 1; }
+        .event-content { display: flex; align-items: center; gap: 12px; }
+        .event-controls { 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .event-time { 
+            color: #cbd5e1;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        .event-time:hover { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+        .time-input { 
             background: transparent;
             border: 1px solid #475569;
             color: white;
@@ -29,774 +132,403 @@
             font-size: 12px;
             width: 60px;
         }
-        .time-input:focus {
-            outline: none;
-            border-color: #3b82f6;
+        .time-input:focus { outline: none; border-color: #3b82f6; }
+        .icon { width: 16px; height: 16px; border-radius: 50%; }
+        .icon-green { background: #16a34a; }
+        .icon-red { background: #dc2626; }
+        .icon-purple { background: #9333ea; }
+        .icon-orange { background: #ea580c; }
+        .stats { 
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
         }
+        .stat-card { 
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+        }
+        .stat-number { font-size: 24px; font-weight: bold; margin-bottom: 4px; }
+        .stat-label { font-size: 12px; color: #94a3b8; }
+        .chart-placeholder {
+            background: rgba(55, 65, 81, 0.5);
+            border-radius: 8px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+            font-size: 14px;
+        }
+        .hidden { display: none; }
     </style>
 </head>
 <body>
-    <div id="root"></div>
+    <div class="header">
+        <div class="header-content">
+            <div class="title">
+                <span>🚗</span>
+                <span>Vehicle Tracker</span>
+            </div>
+            <button class="btn btn-small btn-green" onclick="exportData()">📥</button>
+        </div>
+    </div>
 
-    <script type="text/babel">
-        const { useState, useEffect } = React;
-        const { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } = Recharts;
+    <div class="container">
+        <div class="toggle">
+            <button id="todayBtn" class="btn-active" onclick="showView('today')">Today</button>
+            <button id="dashboardBtn" onclick="showView('dashboard')">Dashboard</button>
+        </div>
 
-        const VehicleTracker = () => {
-            const [data, setData] = useState(() => {
-                const saved = localStorage.getItem('vehicleTrackerData');
-                return saved ? JSON.parse(saved) : {};
+        <div id="todayView">
+            <div class="card">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                    <span>📅</span>
+                    <span style="color: #94a3b8;">Today</span>
+                </div>
+                <div style="font-size: 24px; font-weight: bold;" id="currentDate"></div>
+            </div>
+
+            <div style="margin-bottom: 24px;">
+                <div class="section-title">
+                    <span>🚗</span>
+                    <span>Vehicle Tracking</span>
+                </div>
+                <div class="grid-2">
+                    <button class="btn btn-green" onclick="logEvent('in', 'vehicle')">
+                        <span>🚗</span>
+                        <span>Car In</span>
+                    </button>
+                    <button class="btn btn-red" onclick="logEvent('out', 'vehicle')">
+                        <span>🚗</span>
+                        <span>Car Out</span>
+                    </button>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 24px;">
+                <div class="section-title">
+                    <span>🛗</span>
+                    <span>Elevator Tracking</span>
+                </div>
+                <div class="grid-2">
+                    <button class="btn btn-purple" onclick="logEvent('in', 'elevator')">
+                        <span>🛗</span>
+                        <span>Elevator In</span>
+                    </button>
+                    <button class="btn btn-orange" onclick="logEvent('out', 'elevator')">
+                        <span>🛗</span>
+                        <span>Elevator Out</span>
+                    </button>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 24px;">
+                <div class="section-title">
+                    <span>💡</span>
+                    <span>Evening Light</span>
+                </div>
+                <div class="grid-2">
+                    <button class="btn" id="lightOnBtn" onclick="toggleLight('on')">
+                        <span>💡</span>
+                        <span>Light On</span>
+                    </button>
+                    <button class="btn" id="lightOffBtn" onclick="toggleLight('off')">
+                        <span>💡</span>
+                        <span>Light Off</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="section-title">
+                    <span>🕐</span>
+                    <span>Today's Activity</span>
+                </div>
+                <div id="activityList"></div>
+            </div>
+        </div>
+
+        <div id="dashboardView" class="hidden">
+            <div class="card">
+                <div class="section-title">
+                    <span>📈</span>
+                    <span>7-Day Activity</span>
+                </div>
+                <div class="chart-placeholder">Activity Chart (Last 7 Days)</div>
+            </div>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number" style="color: #3b82f6;" id="vehicleTotal">0</div>
+                    <div class="stat-label">Vehicle Trips (7 days)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" style="color: #9333ea;" id="elevatorTotal">0</div>
+                    <div class="stat-label">Elevator Trips (7 days)</div>
+                </div>
+            </div>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number" style="color: #16a34a;" id="totalTrips">0</div>
+                    <div class="stat-label">Total Trips (7 days)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" style="color: #eab308;" id="lightDays">0</div>
+                    <div class="stat-label">Days Light On</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let data = {};
+        let currentView = 'today';
+        let editingEvent = null;
+        const today = new Date().toISOString().split('T')[0];
+
+        // Load data
+        function loadData() {
+            const saved = localStorage.getItem('vehicleTrackerData');
+            data = saved ? JSON.parse(saved) : {};
+        }
+
+        // Save data
+        function saveData() {
+            localStorage.setItem('vehicleTrackerData', JSON.stringify(data));
+        }
+
+        // Get today's data
+        function getTodayData() {
+            return data[today] || {
+                date: today,
+                vehicleEvents: [],
+                elevatorEvents: [],
+                eveningLight: { status: 'not_recorded', time: null }
+            };
+        }
+
+        // Log event
+        function logEvent(type, category) {
+            const now = new Date();
+            const timeString = now.toTimeString().slice(0, 5);
+            const eventKey = category === 'vehicle' ? 'vehicleEvents' : 'elevatorEvents';
+            
+            if (!data[today]) data[today] = getTodayData();
+            
+            data[today][eventKey].push({
+                type: type,
+                time: timeString,
+                timestamp: now.toISOString()
             });
-            const [currentView, setCurrentView] = useState('today');
-            const [editingEvent, setEditingEvent] = useState(null);
-            const today = new Date().toISOString().split('T')[0];
+            
+            saveData();
+            updateDisplay();
+        }
 
-            useEffect(() => {
-                localStorage.setItem('vehicleTrackerData', JSON.stringify(data));
-            }, [data]);
+        // Update event time
+        function updateEventTime(category, index, newTime) {
+            const eventKey = category === 'vehicle' ? 'vehicleEvents' : 'elevatorEvents';
+            data[today][eventKey][index].time = newTime;
+            saveData();
+            updateDisplay();
+        }
 
-            useEffect(() => {
-                if ('serviceWorker' in navigator) {
-                    const swCode = `
-                        const CACHE_NAME = 'vehicle-tracker-v1';
-                        self.addEventListener('install', event => {
-                            event.waitUntil(caches.open(CACHE_NAME));
-                        });
-                        self.addEventListener('fetch', event => {
-                            event.respondWith(
-                                caches.match(event.request).then(response => response || fetch(event.request))
-                            );
-                        });
-                    `;
-                    const blob = new Blob([swCode], { type: 'application/javascript' });
-                    const swUrl = URL.createObjectURL(blob);
-                    navigator.serviceWorker.register(swUrl).catch(() => {});
-                }
-            }, []);
+        // Delete event
+        function deleteEvent(category, index) {
+            const eventKey = category === 'vehicle' ? 'vehicleEvents' : 'elevatorEvents';
+            data[today][eventKey].splice(index, 1);
+            saveData();
+            updateDisplay();
+        }
 
-            const getTodayData = () => {
-                return data[today] || {
-                    date: today,
-                    vehicleEvents: [],
-                    elevatorEvents: [],
-                    eveningLight: { status: 'not_recorded', time: null }
-                };
+        // Toggle light
+        function toggleLight(status) {
+            const now = new Date();
+            const timeString = now.toTimeString().slice(0, 5);
+            
+            if (!data[today]) data[today] = getTodayData();
+            
+            data[today].eveningLight = {
+                status: status,
+                time: timeString,
+                timestamp: now.toISOString()
             };
+            
+            saveData();
+            updateDisplay();
+        }
 
-            const logEvent = (type, category) => {
-                const now = new Date();
-                const timeString = now.toTimeString().slice(0, 5);
-                const eventKey = category === 'vehicle' ? 'vehicleEvents' : 'elevatorEvents';
-                
-                setData(prev => ({
-                    ...prev,
-                    [today]: {
-                        ...getTodayData(),
-                        [eventKey]: [
-                            ...getTodayData()[eventKey],
-                            { type, time: timeString, timestamp: now.toISOString() }
-                        ]
-                    }
-                }));
-            };
+        // Clear light
+        function clearLight() {
+            if (!data[today]) data[today] = getTodayData();
+            data[today].eveningLight = { status: 'not_recorded', time: null };
+            saveData();
+            updateDisplay();
+        }
 
-            const updateEventTime = (category, index, newTime) => {
-                const eventKey = category === 'vehicle' ? 'vehicleEvents' : 'elevatorEvents';
-                const events = [...getTodayData()[eventKey]];
-                events[index] = { ...events[index], time: newTime };
-                
-                setData(prev => ({
-                    ...prev,
-                    [today]: {
-                        ...getTodayData(),
-                        [eventKey]: events
-                    }
-                }));
-                setEditingEvent(null);
-            };
+        // Export data
+        function exportData() {
+            const dataStr = JSON.stringify(data, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `vehicle-tracker-${today}.json`;
+            link.click();
+        }
 
-            const deleteEvent = (category, index) => {
-                const eventKey = category === 'vehicle' ? 'vehicleEvents' : 'elevatorEvents';
-                setData(prev => ({
-                    ...prev,
-                    [today]: {
-                        ...getTodayData(),
-                        [eventKey]: getTodayData()[eventKey].filter((_, i) => i !== index)
-                    }
-                }));
-            };
+        // Show view
+        function showView(view) {
+            currentView = view;
+            document.getElementById('todayView').classList.toggle('hidden', view !== 'today');
+            document.getElementById('dashboardView').classList.toggle('hidden', view !== 'dashboard');
+            document.getElementById('todayBtn').classList.toggle('btn-active', view === 'today');
+            document.getElementById('dashboardBtn').classList.toggle('btn-active', view === 'dashboard');
+            
+            if (view === 'dashboard') {
+                updateDashboard();
+            }
+        }
 
-            const toggleEveningLight = (status) => {
-                const now = new Date();
-                const timeString = now.toTimeString().slice(0, 5);
-                
-                setData(prev => ({
-                    ...prev,
-                    [today]: {
-                        ...getTodayData(),
-                        eveningLight: { status, time: timeString, timestamp: now.toISOString() }
-                    }
-                }));
-            };
-
-            const clearEveningLight = () => {
-                setData(prev => ({
-                    ...prev,
-                    [today]: {
-                        ...getTodayData(),
-                        eveningLight: { status: 'not_recorded', time: null }
-                    }
-                }));
-            };
-
-            const exportData = () => {
-                const dataStr = JSON.stringify(data, null, 2);
-                const dataBlob = new Blob([dataStr], { type: 'application/json' });
-                const url = URL.createObjectURL(dataBlob);
-                const link = document.createElement('a');
-                link.href = url;
-                link.download = `vehicle-tracker-${new Date().toISOString().split('T')[0]}.json`;
-                link.click();
-            };
-
-            const getLast7DaysData = () => {
-                const days = [];
-                for (let i = 6; i >= 0; i--) {
-                    const date = new Date();
-                    date.setDate(date.getDate() - i);
-                    const dateStr = date.toISOString().split('T')[0];
-                    const dayData = data[dateStr];
-                    
-                    days.push({
-                        date: dateStr,
-                        shortDate: date.toLocaleDateString('en', { weekday: 'short', month: 'short', day: 'numeric' }),
-                        vehicleTrips: dayData?.vehicleEvents?.length || 0,
-                        elevatorTrips: dayData?.elevatorEvents?.length || 0,
-                        totalTrips: (dayData?.vehicleEvents?.length || 0) + (dayData?.elevatorEvents?.length || 0),
-                        lightOn: dayData?.eveningLight?.status === 'on' ? 1 : 0,
-                        lightOff: dayData?.eveningLight?.status === 'off' ? 1 : 0,
-                        hasData: !!dayData
-                    });
-                }
-                return days;
-            };
-
-            const getActivityStatusData = () => {
-                const last7Days = getLast7DaysData();
-                const totalDays = last7Days.filter(d => d.hasData).length;
-                const daysWithActivity = last7Days.filter(d => d.totalTrips > 0).length;
-                
-                return [
-                    { name: 'Days with Activity', value: daysWithActivity, color: '#3b82f6' },
-                    { name: 'Inactive Days', value: totalDays - daysWithActivity, color: '#64748b' },
-                ];
-            };
-
-            const renderEventItem = (event, index, category, iconColor) => {
-                const isEditing = editingEvent === `${category}-${index}`;
-                
-                return React.createElement('div', {
-                    key: index,
-                    className: "flex items-center justify-between bg-slate-700 rounded-lg p-3 group"
-                }, [
-                    React.createElement('div', {
-                        key: 'content',
-                        className: "flex items-center gap-3"
-                    }, [
-                        React.createElement('div', {
-                            key: 'icon',
-                            className: `w-4 h-4 rounded-full ${iconColor}`
-                        }),
-                        React.createElement('span', {
-                            key: 'text',
-                            className: "capitalize"
-                        }, `${category} ${event.type}`)
-                    ]),
-                    React.createElement('div', {
-                        key: 'controls',
-                        className: "flex items-center gap-2"
-                    }, [
-                        isEditing ? 
-                            React.createElement('input', {
-                                key: 'input',
-                                type: 'time',
-                                value: event.time,
-                                onChange: (e) => updateEventTime(category, index, e.target.value),
-                                onBlur: () => setEditingEvent(null),
-                                onKeyDown: (e) => e.key === 'Enter' && setEditingEvent(null),
-                                className: "time-input",
-                                autoFocus: true
-                            }) :
-                            React.createElement('span', {
-                                key: 'time',
-                                className: "text-slate-300 text-sm cursor-pointer hover:text-blue-400",
-                                onClick: () => setEditingEvent(`${category}-${index}`)
-                            }, event.time),
-                        React.createElement('button', {
-                            key: 'edit',
-                            onClick: () => setEditingEvent(`${category}-${index}`),
-                            className: "opacity-0 group-hover:opacity-100 p-1 text-blue-400 hover:bg-blue-400/20 rounded transition-all"
-                        }, '✏️'),
-                        React.createElement('button', {
-                            key: 'delete',
-                            onClick: () => deleteEvent(category, index),
-                            className: "opacity-0 group-hover:opacity-100 p-1 text-red-400 hover:bg-red-400/20 rounded transition-all"
-                        }, '🗑️')
-                    ])
-                ]);
-            };
-
+        // Update display
+        function updateDisplay() {
             const todayData = getTodayData();
-            const last7Days = getLast7DaysData();
-            const statusData = getActivityStatusData();
+            
+            // Update current date
+            document.getElementById('currentDate').textContent = new Date().toLocaleDateString('en', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
 
-            return React.createElement('div', {
-                className: "min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 text-white"
-            }, [
-                // Header
-                React.createElement('div', {
-                    key: 'header',
-                    className: "bg-slate-800/50 backdrop-blur-sm border-b border-slate-700 sticky top-0 z-10"
-                }, 
-                    React.createElement('div', {
-                        className: "max-w-md mx-auto px-4 py-4"
-                    },
-                        React.createElement('div', {
-                            className: "flex items-center justify-between"
-                        }, [
-                            React.createElement('div', {
-                                key: 'title',
-                                className: "flex items-center gap-2"
-                            }, [
-                                React.createElement('span', { key: 'icon' }, '🚗'),
-                                React.createElement('h1', {
-                                    key: 'text',
-                                    className: "text-xl font-bold"
-                                }, 'Vehicle Tracker')
-                            ]),
-                            React.createElement('button', {
-                                key: 'export',
-                                onClick: exportData,
-                                className: "p-2 bg-green-600 hover:bg-green-700 rounded-lg transition-colors"
-                            }, '📥')
-                        ])
-                    )
-                ),
+            // Update light buttons
+            const lightOnBtn = document.getElementById('lightOnBtn');
+            const lightOffBtn = document.getElementById('lightOffBtn');
+            
+            lightOnBtn.className = 'btn ' + (todayData.eveningLight.status === 'on' ? 'btn-yellow' : 'btn-gray');
+            lightOffBtn.className = 'btn ' + (todayData.eveningLight.status === 'off' ? 'btn-gray' : 'btn-gray');
 
-                // Main Content
-                React.createElement('div', {
-                    key: 'main',
-                    className: "max-w-md mx-auto px-4 py-6"
-                }, [
-                    // View Toggle
-                    React.createElement('div', {
-                        key: 'toggle',
-                        className: "flex bg-slate-800 rounded-lg p-1 mb-6"
-                    }, [
-                        React.createElement('button', {
-                            key: 'today',
-                            onClick: () => setCurrentView('today'),
-                            className: `flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
-                                currentView === 'today' ? 'bg-blue-600 text-white' : 'text-slate-400'
-                            }`
-                        }, 'Today'),
-                        React.createElement('button', {
-                            key: 'dashboard',
-                            onClick: () => setCurrentView('dashboard'),
-                            className: `flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
-                                currentView === 'dashboard' ? 'bg-blue-600 text-white' : 'text-slate-400'
-                            }`
-                        }, 'Dashboard')
-                    ]),
+            // Update activity list
+            const activityList = document.getElementById('activityList');
+            let html = '';
 
-                    // Today View
-                    currentView === 'today' && React.createElement('div', { key: 'today-view' }, [
-                        // Date
-                        React.createElement('div', {
-                            key: 'date',
-                            className: "bg-slate-800/50 rounded-xl p-4 mb-6"
-                        }, [
-                            React.createElement('div', {
-                                key: 'date-header',
-                                className: "flex items-center gap-2 mb-2"
-                            }, [
-                                React.createElement('span', { key: 'icon' }, '📅'),
-                                React.createElement('span', {
-                                    key: 'text',
-                                    className: "text-slate-300"
-                                }, 'Today')
-                            ]),
-                            React.createElement('div', {
-                                key: 'date-text',
-                                className: "text-2xl font-bold"
-                            }, new Date().toLocaleDateString('en', { 
-                                weekday: 'long', 
-                                year: 'numeric', 
-                                month: 'long', 
-                                day: 'numeric' 
-                            }))
-                        ]),
+            // Vehicle events
+            todayData.vehicleEvents.forEach((event, index) => {
+                const iconClass = event.type === 'in' ? 'icon-green' : 'icon-red';
+                html += `
+                    <div class="event-item">
+                        <div class="event-content">
+                            <div class="icon ${iconClass}"></div>
+                            <span>Vehicle ${event.type}</span>
+                        </div>
+                        <div class="event-controls">
+                            <span class="event-time" onclick="editTime('vehicle', ${index}, '${event.time}')">${event.time}</span>
+                            <button class="btn btn-small" onclick="deleteEvent('vehicle', ${index})" style="background: rgba(220, 38, 38, 0.2); color: #f87171;">🗑️</button>
+                        </div>
+                    </div>
+                `;
+            });
 
-                        // Vehicle Tracking
-                        React.createElement('div', {
-                            key: 'vehicle',
-                            className: "space-y-4 mb-6"
-                        }, [
-                            React.createElement('h2', {
-                                key: 'title',
-                                className: "text-lg font-semibold flex items-center gap-2"
-                            }, [
-                                React.createElement('span', { key: 'icon' }, '🚗'),
-                                'Vehicle Tracking'
-                            ]),
-                            React.createElement('div', {
-                                key: 'buttons',
-                                className: "grid grid-cols-2 gap-3"
-                            }, [
-                                React.createElement('button', {
-                                    key: 'in',
-                                    onClick: () => logEvent('in', 'vehicle'),
-                                    className: "bg-green-600 hover:bg-green-700 text-white p-4 rounded-xl transition-colors flex flex-col items-center gap-2"
-                                }, [
-                                    React.createElement('span', { key: 'icon' }, '🚗'),
-                                    React.createElement('span', {
-                                        key: 'text',
-                                        className: "font-medium"
-                                    }, 'Car In')
-                                ]),
-                                React.createElement('button', {
-                                    key: 'out',
-                                    onClick: () => logEvent('out', 'vehicle'),
-                                    className: "bg-red-600 hover:bg-red-700 text-white p-4 rounded-xl transition-colors flex flex-col items-center gap-2"
-                                }, [
-                                    React.createElement('span', { key: 'icon' }, '🚗'),
-                                    React.createElement('span', {
-                                        key: 'text',
-                                        className: "font-medium"
-                                    }, 'Car Out')
-                                ])
-                            ])
-                        ]),
+            // Elevator events
+            todayData.elevatorEvents.forEach((event, index) => {
+                const iconClass = event.type === 'in' ? 'icon-purple' : 'icon-orange';
+                html += `
+                    <div class="event-item">
+                        <div class="event-content">
+                            <div class="icon ${iconClass}"></div>
+                            <span>Elevator ${event.type}</span>
+                        </div>
+                        <div class="event-controls">
+                            <span class="event-time" onclick="editTime('elevator', ${index}, '${event.time}')">${event.time}</span>
+                            <button class="btn btn-small" onclick="deleteEvent('elevator', ${index})" style="background: rgba(220, 38, 38, 0.2); color: #f87171;">🗑️</button>
+                        </div>
+                    </div>
+                `;
+            });
 
-                        // Elevator Tracking
-                        React.createElement('div', {
-                            key: 'elevator',
-                            className: "space-y-4 mb-6"
-                        }, [
-                            React.createElement('h2', {
-                                key: 'title',
-                                className: "text-lg font-semibold flex items-center gap-2"
-                            }, [
-                                React.createElement('span', { key: 'icon' }, '🛗'),
-                                'Elevator Tracking'
-                            ]),
-                            React.createElement('div', {
-                                key: 'buttons',
-                                className: "grid grid-cols-2 gap-3"
-                            }, [
-                                React.createElement('button', {
-                                    key: 'in',
-                                    onClick: () => logEvent('in', 'elevator'),
-                                    className: "bg-purple-600 hover:bg-purple-700 text-white p-4 rounded-xl transition-colors flex flex-col items-center gap-2"
-                                }, [
-                                    React.createElement('span', { key: 'icon' }, '🛗'),
-                                    React.createElement('span', {
-                                        key: 'text',
-                                        className: "font-medium"
-                                    }, 'Elevator In')
-                                ]),
-                                React.createElement('button', {
-                                    key: 'out',
-                                    onClick: () => logEvent('out', 'elevator'),
-                                    className: "bg-orange-600 hover:bg-orange-700 text-white p-4 rounded-xl transition-colors flex flex-col items-center gap-2"
-                                }, [
-                                    React.createElement('span', { key: 'icon' }, '🛗'),
-                                    React.createElement('span', {
-                                        key: 'text',
-                                        className: "font-medium"
-                                    }, 'Elevator Out')
-                                ])
-                            ])
-                        ]),
+            // Light status
+            if (todayData.eveningLight.status !== 'not_recorded') {
+                html += `
+                    <div class="event-item">
+                        <div class="event-content">
+                            <div class="icon" style="background: #eab308;"></div>
+                            <span>Evening Light ${todayData.eveningLight.status}</span>
+                        </div>
+                        <div class="event-controls">
+                            <span class="event-time">${todayData.eveningLight.time}</span>
+                            <button class="btn btn-small" onclick="clearLight()" style="background: rgba(220, 38, 38, 0.2); color: #f87171;">🗑️</button>
+                        </div>
+                    </div>
+                `;
+            }
 
-                        // Evening Light
-                        React.createElement('div', {
-                            key: 'light',
-                            className: "space-y-4 mb-6"
-                        }, [
-                            React.createElement('h3', {
-                                key: 'title',
-                                className: "text-lg font-semibold flex items-center gap-2"
-                            }, [
-                                React.createElement('span', { key: 'icon' }, '💡'),
-                                'Evening Light'
-                            ]),
-                            React.createElement('div', {
-                                key: 'buttons',
-                                className: "grid grid-cols-2 gap-3"
-                            }, [
-                                React.createElement('button', {
-                                    key: 'on',
-                                    onClick: () => toggleEveningLight('on'),
-                                    className: `p-4 rounded-xl transition-colors flex flex-col items-center gap-2 ${
-                                        todayData.eveningLight.status === 'on' 
-                                            ? 'bg-yellow-600 text-white' 
-                                            : 'bg-slate-700 hover:bg-slate-600 text-slate-300'
-                                    }`
-                                }, [
-                                    React.createElement('span', { key: 'icon' }, '💡'),
-                                    React.createElement('span', {
-                                        key: 'text',
-                                        className: "font-medium"
-                                    }, 'Light On')
-                                ]),
-                                React.createElement('button', {
-                                    key: 'off',
-                                    onClick: () => toggleEveningLight('off'),
-                                    className: `p-4 rounded-xl transition-colors flex flex-col items-center gap-2 ${
-                                        todayData.eveningLight.status === 'off' 
-                                            ? 'bg-slate-600 text-white' 
-                                            : 'bg-slate-700 hover:bg-slate-600 text-slate-300'
-                                    }`
-                                }, [
-                                    React.createElement('span', { key: 'icon' }, '💡'),
-                                    React.createElement('span', {
-                                        key: 'text',
-                                        className: "font-medium"
-                                    }, 'Light Off')
-                                ])
-                            ])
-                        ]),
+            if (html === '') {
+                html = '<p style="color: #94a3b8; font-size: 14px;">No activity recorded today</p>';
+            }
 
-                        // Today's Activity
-                        React.createElement('div', {
-                            key: 'activity',
-                            className: "bg-slate-800/50 rounded-xl p-4"
-                        }, [
-                            React.createElement('h3', {
-                                key: 'title',
-                                className: "text-lg font-semibold mb-3 flex items-center gap-2"
-                            }, [
-                                React.createElement('span', { key: 'icon' }, '🕐'),
-                                "Today's Activity"
-                            ]),
-                            React.createElement('div', {
-                                key: 'events',
-                                className: "space-y-2 mb-4"
-                            }, [
-                                ...todayData.vehicleEvents.map((event, index) => 
-                                    renderEventItem(event, index, 'vehicle', event.type === 'in' ? 'bg-green-400' : 'bg-red-400')
-                                ),
-                                ...todayData.elevatorEvents.map((event, index) => 
-                                    renderEventItem(event, index, 'elevator', event.type === 'in' ? 'bg-purple-400' : 'bg-orange-400')
-                                ),
-                                (todayData.vehicleEvents.length === 0 && todayData.elevatorEvents.length === 0) &&
-                                React.createElement('p', {
-                                    key: 'empty',
-                                    className: "text-slate-400 text-sm"
-                                }, 'No activity recorded today')
-                            ]),
-                            todayData.eveningLight.status !== 'not_recorded' &&
-                            React.createElement('div', {
-                                key: 'light-status',
-                                className: "bg-slate-700 rounded-lg p-3 group"
-                            }, 
-                                React.createElement('div', {
-                                    className: "flex items-center justify-between"
-                                }, [
-                                    React.createElement('div', {
-                                        key: 'content',
-                                        className: "flex items-center gap-3"
-                                    }, [
-                                        React.createElement('span', { key: 'icon' }, '💡'),
-                                        React.createElement('span', {
-                                            key: 'text'
-                                        }, `Evening Light ${todayData.eveningLight.status}`)
-                                    ]),
-                                    React.createElement('div', {
-                                        key: 'controls',
-                                        className: "flex items-center gap-2"
-                                    }, [
-                                        React.createElement('span', {
-                                            key: 'time',
-                                            className: "text-slate-300 text-sm"
-                                        }, todayData.eveningLight.time),
-                                        React.createElement('button', {
-                                            key: 'delete',
-                                            onClick: clearEveningLight,
-                                            className: "opacity-0 group-hover:opacity-100 p-1 text-red-400 hover:bg-red-400/20 rounded transition-all"
-                                        }, '🗑️')
-                                    ])
-                                ])
-                            )
-                        ])
-                    ]),
+            activityList.innerHTML = html;
+        }
 
-                    // Dashboard View
-                    currentView === 'dashboard' && React.createElement('div', { key: 'dashboard-view' }, [
-                        // Activity Chart
-                        React.createElement('div', {
-                            key: 'chart1',
-                            className: "bg-slate-800/50 rounded-xl p-4 mb-6"
-                        }, [
-                            React.createElement('h3', {
-                                key: 'title',
-                                className: "text-lg font-semibold mb-4 flex items-center gap-2"
-                            }, [
-                                React.createElement('span', { key: 'icon' }, '📈'),
-                                '7-Day Activity'
-                            ]),
-                            React.createElement('div', {
-                                key: 'chart',
-                                className: "h-48"
-                            },
-                                React.createElement(ResponsiveContainer, {
-                                    width: "100%",
-                                    height: "100%"
-                                },
-                                    React.createElement(BarChart, {
-                                        data: last7Days
-                                    }, [
-                                        React.createElement(CartesianGrid, {
-                                            key: 'grid',
-                                            strokeDasharray: "3 3",
-                                            stroke: "#374151"
-                                        }),
-                                        React.createElement(XAxis, {
-                                            key: 'x',
-                                            dataKey: "shortDate",
-                                            stroke: "#9ca3af",
-                                            fontSize: 12,
-                                            angle: -45,
-                                            textAnchor: "end",
-                                            height: 60
-                                        }),
-                                        React.createElement(YAxis, {
-                                            key: 'y',
-                                            stroke: "#9ca3af",
-                                            fontSize: 12
-                                        }),
-                                        React.createElement(Tooltip, {
-                                            key: 'tooltip',
-                                            contentStyle: {
-                                                backgroundColor: '#1f2937',
-                                                border: '1px solid #374151',
-                                                borderRadius: '8px'
-                                            }
-                                        }),
-                                        React.createElement(Bar, {
-                                            key: 'vehicle',
-                                            dataKey: "vehicleTrips",
-                                            fill: "#3b82f6",
-                                            name: "Vehicle"
-                                        }),
-                                        React.createElement(Bar, {
-                                            key: 'elevator',
-                                            dataKey: "elevatorTrips",
-                                            fill: "#8b5cf6",
-                                            name: "Elevator"
-                                        })
-                                    ])
-                                )
-                            )
-                        ]),
+        // Edit time
+        function editTime(category, index, currentTime) {
+            const newTime = prompt('Enter new time (HH:MM):', currentTime);
+            if (newTime && newTime.match(/^\d{2}:\d{2}$/)) {
+                updateEventTime(category, index, newTime);
+            }
+        }
 
-                        // Light Chart
-                        React.createElement('div', {
-                            key: 'chart2',
-                            className: "bg-slate-800/50 rounded-xl p-4 mb-6"
-                        }, [
-                            React.createElement('h3', {
-                                key: 'title',
-                                className: "text-lg font-semibold mb-4 flex items-center gap-2"
-                            }, [
-                                React.createElement('span', { key: 'icon' }, '💡'),
-                                'Evening Light Trend'
-                            ]),
-                            React.createElement('div', {
-                                key: 'chart',
-                                className: "h-48"
-                            },
-                                React.createElement(ResponsiveContainer, {
-                                    width: "100%",
-                                    height: "100%"
-                                },
-                                    React.createElement(BarChart, {
-                                        data: last7Days
-                                    }, [
-                                        React.createElement(CartesianGrid, {
-                                            key: 'grid',
-                                            strokeDasharray: "3 3",
-                                            stroke: "#374151"
-                                        }),
-                                        React.createElement(XAxis, {
-                                            key: 'x',
-                                            dataKey: "shortDate",
-                                            stroke: "#9ca3af",
-                                            fontSize: 12,
-                                            angle: -45,
-                                            textAnchor: "end",
-                                            height: 60
-                                        }),
-                                        React.createElement(YAxis, {
-                                            key: 'y',
-                                            stroke: "#9ca3af",
-                                            fontSize: 12
-                                        }),
-                                        React.createElement(Tooltip, {
-                                            key: 'tooltip',
-                                            contentStyle: {
-                                                backgroundColor: '#1f2937',
-                                                border: '1px solid #374151',
-                                                borderRadius: '8px'
-                                            }
-                                        }),
-                                        React.createElement(Bar, {
-                                            key: 'on',
-                                            dataKey: "lightOn",
-                                            fill: "#eab308",
-                                            name: "Light On"
-                                        }),
-                                        React.createElement(Bar, {
-                                            key: 'off',
-                                            dataKey: "lightOff",
-                                            fill: "#64748b",
-                                            name: "Light Off"
-                                        })
-                                    ])
-                                )
-                            )
-                        ]),
+        // Update dashboard
+        function updateDashboard() {
+            let vehicleTotal = 0;
+            let elevatorTotal = 0;
+            let lightDays = 0;
 
-                        // Pie Chart
-                        React.createElement('div', {
-                            key: 'chart3',
-                            className: "bg-slate-800/50 rounded-xl p-4 mb-6"
-                        }, [
-                            React.createElement('h3', {
-                                key: 'title',
-                                className: "text-lg font-semibold mb-4 flex items-center gap-2"
-                            }, [
-                                React.createElement('span', { key: 'icon' }, '📊'),
-                                'Activity Overview'
-                            ]),
-                            React.createElement('div', {
-                                key: 'chart',
-                                className: "h-48"
-                            },
-                                React.createElement(ResponsiveContainer, {
-                                    width: "100%",
-                                    height: "100%"
-                                },
-                                    React.createElement(PieChart, {}, 
-                                        React.createElement(Pie, {
-                                            data: statusData,
-                                            cx: "50%",
-                                            cy: "50%",
-                                            innerRadius: 40,
-                                            outerRadius: 80,
-                                            paddingAngle: 5,
-                                            dataKey: "value"
-                                        }, statusData.map((entry, index) =>
-                                            React.createElement(Cell, {
-                                                key: `cell-${index}`,
-                                                fill: entry.color
-                                            })
-                                        ))
-                                    )
-                                )
-                            ),
-                            React.createElement('div', {
-                                key: 'legend',
-                                className: "flex justify-center gap-4 mt-2"
-                            }, statusData.map((entry, index) =>
-                                React.createElement('div', {
-                                    key: index,
-                                    className: "flex items-center gap-2"
-                                }, [
-                                    React.createElement('div', {
-                                        key: 'color',
-                                        className: "w-3 h-3 rounded-full",
-                                        style: { backgroundColor: entry.color }
-                                    }),
-                                    React.createElement('span', {
-                                        key: 'text',
-                                        className: "text-sm text-slate-300"
-                                    }, entry.name)
-                                ])
-                            ))
-                        ]),
+            // Calculate last 7 days
+            for (let i = 0; i < 7; i++) {
+                const date = new Date();
+                date.setDate(date.getDate() - i);
+                const dateStr = date.toISOString().split('T')[0];
+                const dayData = data[dateStr];
 
-                        // Stats
-                        React.createElement('div', {
-                            key: 'stats1',
-                            className: "grid grid-cols-2 gap-4 mb-4"
-                        }, [
-                            React.createElement('div', {
-                                key: 'vehicle',
-                                className: "bg-slate-800/50 rounded-xl p-4"
-                            }, [
-                                React.createElement('div', {
-                                    key: 'number',
-                                    className: "text-2xl font-bold text-blue-400"
-                                }, last7Days.reduce((sum, day) => sum + day.vehicleTrips, 0)),
-                                React.createElement('div', {
-                                    key: 'label',
-                                    className: "text-slate-300 text-sm"
-                                }, 'Vehicle Trips (7 days)')
-                            ]),
-                            React.createElement('div', {
-                                key: 'elevator',
-                                className: "bg-slate-800/50 rounded-xl p-4"
-                            }, [
-                                React.createElement('div', {
-                                    key: 'number',
-                                    className: "text-2xl font-bold text-purple-400"
-                                }, last7Days.reduce((sum, day) => sum + day.elevatorTrips, 0)),
-                                React.createElement('div', {
-                                    key: 'label',
-                                    className: "text-slate-300 text-sm"
-                                }, 'Elevator Trips (7 days)')
-                            ])
-                        ]),
+                if (dayData) {
+                    vehicleTotal += dayData.vehicleEvents?.length || 0;
+                    elevatorTotal += dayData.elevatorEvents?.length || 0;
+                    if (dayData.eveningLight?.status === 'on') lightDays++;
+                }
+            }
 
-                        React.createElement('div', {
-                            key: 'stats2',
-                            className: "grid grid-cols-2 gap-4"
-                        }, [
-                            React.createElement('div', {
-                                key: 'total',
-                                className: "bg-slate-800/50 rounded-xl p-4"
-                            }, [
-                                React.createElement('div', {
-                                    key: 'number',
-                                    className: "text-2xl font-bold text-green-400"
-                                }, last7Days.reduce((sum, day) => sum + day.totalTrips, 0)),
-                                React.createElement('div', {
-                                    key: 'label',
-                                    className: "text-slate-300 text-sm"
-                                }, 'Total Trips (7 days)')
-                            ]),
-                            React.createElement('div', {
-                                key: 'light',
-                                className: "bg-slate-800/50 rounded-xl p-4"
-                            }, [
-                                React.createElement('div', {
-                                    key: 'number',
-                                    className: "text-2xl font-bold text-yellow-400"
-                                }, last7Days.filter(d => d.lightOn === 1).length),
-                                React.createElement('div', {
-                                    key: 'label',
-                                    className: "text-slate-300 text-sm"
-                                }, 'Days Light On')
-                            ])
-                        ])
-                    ])
-                ])
-            ]);
-        };
+            document.getElementById('vehicleTotal').textContent = vehicleTotal;
+            document.getElementById('elevatorTotal').textContent = elevatorTotal;
+            document.getElementById('totalTrips').textContent = vehicleTotal + elevatorTotal;
+            document.getElementById('lightDays').textContent = lightDays;
+        }
 
-        ReactDOM.render(React.createElement(VehicleTracker), document.getElementById('root'));
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            const swCode = `
+                const CACHE_NAME = 'vehicle-tracker-v1';
+                self.addEventListener('install', event => {
+                    event.waitUntil(caches.open(CACHE_NAME));
+                });
+                self.addEventListener('fetch', event => {
+                    event.respondWith(
+                        caches.match(event.request).then(response => response || fetch(event.request))
+                    );
+                });
+            `;
+            const blob = new Blob([swCode], { type: 'application/javascript' });
+            const swUrl = URL.createObjectURL(blob);
+            navigator.serviceWorker.register(swUrl).catch(() => {});
+        }
+
+        // Initialize
+        loadData();
+        updateDisplay();
     </script>
 </body>
 </html>
