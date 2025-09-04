@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#1e293b">
-    <title>Vehicle Tracker</title>
+    <title>L-McQueen</title>
     
     <!-- PWA Manifest -->
-    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiVmVoaWNsZSBUcmFja2VyIiwic2hvcnRfbmFtZSI6IlZlaGljbGVUcmFja2VyIiwiZGVzY3JpcHRpb24iOiJUcmFjayB2ZWhpY2xlIGFuZCBlbGV2YXRvciBtb3ZlbWVudHMiLCJzdGFydF91cmwiOiIuLyIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwiYmFja2dyb3VuZF9jb2xvciI6IiMxZTI5M2IiLCJ0aGVtZV9jb2xvciI6IiMxZTI5M2IiLCJpY29ucyI6W3sic3JjIjoiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCNGJXeHVjejBpYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01DOXpkbWNpSUhkcFpIUm9QU0l5TkRBaUlHaGxhV2RvZEQwaU1qUXdJajQ4Y21WamRDQjNhV1IwYUQwaU1qUXdJaUJvWldsbmFIUTlJakkwTUNJZ1ptbHNiRDBpSXpGbE1qa3lZbUlpTHo0OGNHRjBhQ0JrUFNKTk1USXdJRFl3WXpBdE16TXVNVFF0TWpZdU9EWXROakF0TmpBdE5qQlRPRFkyUXpNeVF6RXlNQ0F5Tmk0NE5pQXhNakFnTmpCYVRURTJNQ0F4TURCRE16TXVNVFFnTUNBMk1DQXlOaTQ0TmlBMk1DQTJNSE10TWpZdU9EWWdOakF0TmpBZ05qQmFJaUJtYVd4c1BTSjNhR2wwWlNJdlBqd3ZjM1puUGc9PSIsInNpemVzIjoiMjQweDI0MCIsInR5cGUiOiJpbWFnZS9zdmcreG1sIn1dfQ==">
+    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiTC1NY1F1ZWVuIiwic2hvcnRfbmFtZSI6IkwtTWNRdWVlbiIsImRlc2NyaXB0aW9uIjoiVHJhY2sgdmVoaWNsZSBhbmQgZWxldmF0b3IgbW92ZW1lbnRzIiwic3RhcnRfdXJsIjoiLi8iLCJkaXNwbGF5Ijoic3RhbmRhbG9uZSIsImJhY2tncm91bmRfY29sb3IiOiIjMWUyOTNiIiwidGhlbWVfY29sb3IiOiIjMWUyOTNiIiwiaWNvbnMiOlt7InNyYyI6ImRhdGE6aW1hZ2Uvc3ZnK3htbDtiYXNlNjQsUEhOMlp5QjRiV3h1Y3owaWFIUjBjRG92TDNkM2R5NTNNeTV2Y21jdk1qQXdNQzl6ZG1jaUlIZHBaSFJvUFNJeU5EQWlJR2hsYVdkb2REMGlNalF3SWo0OGNtVmpkQ0IzYVdSMGFEMGlNalF3SWlCb1pXbG5hSFE5SWpJME1DSWdabWxzYkQwaUl6RmxNamt5WW1JaUx6NDhjR0YwYUNCa1BTSk5NVEl3SURZd1l6QXRNek11TVRRVE1qWXVPRFl0TmpBdE5qQXROakJUT0RZMVF6TXlRekV5TUNBeU5pNDROaUF4TWpBZ05qQmFUVEUyTUNBeE1EQmpNek11TVRRZ01DQTJNRkF5Tmk0NE5pQTJNRkEyTUVNdE1qWXVPRFl0TmpBdE5qQWlJR1pwYkd3OUluZG9hWFJsSWk4K1BIQnZiSGxzYVc1bElIQnZhVzUwY3owaU1USXNOaUF4TWl3eE1pQXhOaXd4TkNJZ1ptbHNiRDBpSXpWbVpqWm1aaUl2UGp3dmMzWm5QZz09Iiwic2l6ZXMiOiIyNDB4MjQwIiwidHlwZSI6ImltYWdlL3N2Zyt4bWwifV19">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -96,6 +99,24 @@
             cursor: pointer;
             transition: all 0.2s;
         }
+        .chart-toggle {
+            display: flex;
+            background: #374151;
+            border-radius: 8px;
+            padding: 2px;
+            margin-bottom: 16px;
+        }
+        .chart-toggle button {
+            flex: 1;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 6px;
+            background: transparent;
+            color: #94a3b8;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 12px;
+        }
         .event-item { 
             background: #374151;
             border-radius: 12px;
@@ -115,29 +136,25 @@
             opacity: 0;
             transition: opacity 0.2s;
         }
-        .event-time { 
+        .event-time, .event-date { 
             color: #cbd5e1;
             font-size: 14px;
             cursor: pointer;
             padding: 2px 6px;
             border-radius: 4px;
         }
-        .event-time:hover { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
-        .time-input { 
+        .event-time:hover, .event-date:hover { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+        .time-input, .date-input { 
             background: transparent;
             border: 1px solid #475569;
             color: white;
             padding: 2px 6px;
             border-radius: 4px;
             font-size: 12px;
-            width: 60px;
         }
-        .time-input:focus { outline: none; border-color: #3b82f6; }
-        .icon { width: 16px; height: 16px; border-radius: 50%; }
-        .icon-green { background: #16a34a; }
-        .icon-red { background: #dc2626; }
-        .icon-purple { background: #9333ea; }
-        .icon-orange { background: #ea580c; }
+        .time-input { width: 60px; }
+        .date-input { width: 100px; }
+        .time-input:focus, .date-input:focus { outline: none; border-color: #3b82f6; }
         .stats { 
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -152,27 +169,43 @@
         }
         .stat-number { font-size: 24px; font-weight: bold; margin-bottom: 4px; }
         .stat-label { font-size: 12px; color: #94a3b8; }
-        .chart-placeholder {
+        .chart-container {
             background: rgba(55, 65, 81, 0.5);
             border-radius: 8px;
-            height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #6b7280;
-            font-size: 14px;
+            padding: 16px;
+            height: 250px;
+            position: relative;
         }
         .hidden { display: none; }
+        .current-date {
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+        .current-date:hover {
+            background: rgba(59, 130, 246, 0.2);
+        }
     </style>
 </head>
 <body>
     <div class="header">
         <div class="header-content">
             <div class="title">
-                <span>🚗</span>
-                <span>Vehicle Tracker</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #fbbf24;">
+                    <polygon points="13,2 3,14 12,14 11,22 21,10 12,10 13,2"/>
+                </svg>
+                <span>L-McQueen</span>
             </div>
-            <button class="btn btn-small btn-green" onclick="exportData()">📥</button>
+            <button class="btn btn-small btn-green" onclick="exportData()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7,10 12,15 17,10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+            </button>
         </div>
     </div>
 
@@ -185,24 +218,41 @@
         <div id="todayView">
             <div class="card">
                 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                    <span>📅</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #60a5fa;">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="16" y1="2" x2="16" y2="6"/>
+                        <line x1="8" y1="2" x2="8" y2="6"/>
+                        <line x1="3" y1="10" x2="21" y2="10"/>
+                    </svg>
                     <span style="color: #94a3b8;">Today</span>
                 </div>
-                <div style="font-size: 24px; font-weight: bold;" id="currentDate"></div>
+                <div class="current-date" id="currentDate" onclick="editCurrentDate()"></div>
             </div>
 
             <div style="margin-bottom: 24px;">
                 <div class="section-title">
-                    <span>🚗</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #60a5fa;">
+                        <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9L18.7 9.8c-.2-.5-.6-.8-1.1-.8h-11c-.5 0-.9.3-1.1.8L3.8 11.1C3.1 11.3 2.4 12.1 2.4 13v3c0 .6.4 1 1 1h2"/>
+                        <circle cx="7" cy="17" r="2"/>
+                        <circle cx="17" cy="17" r="2"/>
+                    </svg>
                     <span>Vehicle Tracking</span>
                 </div>
                 <div class="grid-2">
                     <button class="btn btn-green" onclick="logEvent('in', 'vehicle')">
-                        <span>🚗</span>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9L18.7 9.8c-.2-.5-.6-.8-1.1-.8h-11c-.5 0-.9.3-1.1.8L3.8 11.1C3.1 11.3 2.4 12.1 2.4 13v3c0 .6.4 1 1 1h2"/>
+                            <circle cx="7" cy="17" r="2"/>
+                            <circle cx="17" cy="17" r="2"/>
+                        </svg>
                         <span>Car In</span>
                     </button>
                     <button class="btn btn-red" onclick="logEvent('out', 'vehicle')">
-                        <span>🚗</span>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9L18.7 9.8c-.2-.5-.6-.8-1.1-.8h-11c-.5 0-.9.3-1.1.8L3.8 11.1C3.1 11.3 2.4 12.1 2.4 13v3c0 .6.4 1 1 1h2"/>
+                            <circle cx="7" cy="17" r="2"/>
+                            <circle cx="17" cy="17" r="2"/>
+                        </svg>
                         <span>Car Out</span>
                     </button>
                 </div>
@@ -210,16 +260,40 @@
 
             <div style="margin-bottom: 24px;">
                 <div class="section-title">
-                    <span>🛗</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #a855f7;">
+                        <rect x="4" y="2" width="16" height="20" rx="2"/>
+                        <path d="M9 6h6"/>
+                        <path d="M9 10h6"/>
+                        <path d="M9 14h6"/>
+                        <path d="M9 18h6"/>
+                        <path d="M7 6v12"/>
+                        <path d="M17 6v12"/>
+                    </svg>
                     <span>Elevator Tracking</span>
                 </div>
                 <div class="grid-2">
                     <button class="btn btn-purple" onclick="logEvent('in', 'elevator')">
-                        <span>🛗</span>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="4" y="2" width="16" height="20" rx="2"/>
+                            <path d="M9 6h6"/>
+                            <path d="M9 10h6"/>
+                            <path d="M9 14h6"/>
+                            <path d="M9 18h6"/>
+                            <path d="M7 6v12"/>
+                            <path d="M17 6v12"/>
+                        </svg>
                         <span>Elevator In</span>
                     </button>
                     <button class="btn btn-orange" onclick="logEvent('out', 'elevator')">
-                        <span>🛗</span>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="4" y="2" width="16" height="20" rx="2"/>
+                            <path d="M9 6h6"/>
+                            <path d="M9 10h6"/>
+                            <path d="M9 14h6"/>
+                            <path d="M9 18h6"/>
+                            <path d="M7 6v12"/>
+                            <path d="M17 6v12"/>
+                        </svg>
                         <span>Elevator Out</span>
                     </button>
                 </div>
@@ -227,16 +301,28 @@
 
             <div style="margin-bottom: 24px;">
                 <div class="section-title">
-                    <span>💡</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #fbbf24;">
+                        <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/>
+                        <path d="M9 18h6"/>
+                        <path d="M10 22h4"/>
+                    </svg>
                     <span>Evening Light</span>
                 </div>
                 <div class="grid-2">
                     <button class="btn" id="lightOnBtn" onclick="toggleLight('on')">
-                        <span>💡</span>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/>
+                            <path d="M9 18h6"/>
+                            <path d="M10 22h4"/>
+                        </svg>
                         <span>Light On</span>
                     </button>
                     <button class="btn" id="lightOffBtn" onclick="toggleLight('off')">
-                        <span>💡</span>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/>
+                            <path d="M9 18h6"/>
+                            <path d="M10 22h4"/>
+                        </svg>
                         <span>Light Off</span>
                     </button>
                 </div>
@@ -244,7 +330,10 @@
 
             <div class="card">
                 <div class="section-title">
-                    <span>🕐</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #60a5fa;">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12,6 12,12 16,14"/>
+                    </svg>
                     <span>Today's Activity</span>
                 </div>
                 <div id="activityList"></div>
@@ -254,32 +343,26 @@
         <div id="dashboardView" class="hidden">
             <div class="card">
                 <div class="section-title">
-                    <span>📈</span>
-                    <span>7-Day Activity</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #60a5fa;">
+                        <polyline points="22,7 13.5,15.5 8.5,10.5 2,17"/>
+                        <polyline points="16,7 22,7 22,13"/>
+                    </svg>
+                    <span>Activity Charts</span>
                 </div>
-                <div class="chart-placeholder">Activity Chart (Last 7 Days)</div>
+                
+                <div class="chart-toggle">
+                    <button id="weekBtn" class="btn-active" onclick="showChart('week')">Week</button>
+                    <button id="monthBtn" onclick="showChart('month')">Month</button>
+                    <button id="allTimeBtn" onclick="showChart('allTime')">All Time</button>
+                </div>
+                
+                <div class="chart-container">
+                    <canvas id="activityChart"></canvas>
+                </div>
             </div>
 
-            <div class="stats">
-                <div class="stat-card">
-                    <div class="stat-number" style="color: #3b82f6;" id="vehicleTotal">0</div>
-                    <div class="stat-label">Vehicle Trips (7 days)</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" style="color: #9333ea;" id="elevatorTotal">0</div>
-                    <div class="stat-label">Elevator Trips (7 days)</div>
-                </div>
-            </div>
-
-            <div class="stats">
-                <div class="stat-card">
-                    <div class="stat-number" style="color: #16a34a;" id="totalTrips">0</div>
-                    <div class="stat-label">Total Trips (7 days)</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" style="color: #eab308;" id="lightDays">0</div>
-                    <div class="stat-label">Days Light On</div>
-                </div>
+            <div class="stats" id="dashboardStats">
+                <!-- Stats will be populated by JavaScript -->
             </div>
         </div>
     </div>
@@ -287,8 +370,9 @@
     <script>
         let data = {};
         let currentView = 'today';
-        let editingEvent = null;
-        const today = new Date().toISOString().split('T')[0];
+        let currentChartView = 'week';
+        let currentDate = new Date().toISOString().split('T')[0];
+        let activityChart = null;
 
         // Load data
         function loadData() {
@@ -301,10 +385,10 @@
             localStorage.setItem('vehicleTrackerData', JSON.stringify(data));
         }
 
-        // Get today's data
-        function getTodayData() {
-            return data[today] || {
-                date: today,
+        // Get data for specific date
+        function getDateData(date) {
+            return data[date] || {
+                date: date,
                 vehicleEvents: [],
                 elevatorEvents: [],
                 eveningLight: { status: 'not_recorded', time: null }
@@ -317,9 +401,9 @@
             const timeString = now.toTimeString().slice(0, 5);
             const eventKey = category === 'vehicle' ? 'vehicleEvents' : 'elevatorEvents';
             
-            if (!data[today]) data[today] = getTodayData();
+            if (!data[currentDate]) data[currentDate] = getDateData(currentDate);
             
-            data[today][eventKey].push({
+            data[currentDate][eventKey].push({
                 type: type,
                 time: timeString,
                 timestamp: now.toISOString()
@@ -330,17 +414,33 @@
         }
 
         // Update event time
-        function updateEventTime(category, index, newTime) {
+        function updateEventTime(category, index, newTime, eventDate) {
             const eventKey = category === 'vehicle' ? 'vehicleEvents' : 'elevatorEvents';
-            data[today][eventKey][index].time = newTime;
+            data[eventDate][eventKey][index].time = newTime;
+            saveData();
+            updateDisplay();
+        }
+
+        // Update event date
+        function updateEventDate(category, index, oldDate, newDate) {
+            const eventKey = category === 'vehicle' ? 'vehicleEvents' : 'elevatorEvents';
+            const event = data[oldDate][eventKey][index];
+            
+            // Remove from old date
+            data[oldDate][eventKey].splice(index, 1);
+            
+            // Add to new date
+            if (!data[newDate]) data[newDate] = getDateData(newDate);
+            data[newDate][eventKey].push(event);
+            
             saveData();
             updateDisplay();
         }
 
         // Delete event
-        function deleteEvent(category, index) {
+        function deleteEvent(category, index, eventDate) {
             const eventKey = category === 'vehicle' ? 'vehicleEvents' : 'elevatorEvents';
-            data[today][eventKey].splice(index, 1);
+            data[eventDate][eventKey].splice(index, 1);
             saveData();
             updateDisplay();
         }
@@ -350,9 +450,9 @@
             const now = new Date();
             const timeString = now.toTimeString().slice(0, 5);
             
-            if (!data[today]) data[today] = getTodayData();
+            if (!data[currentDate]) data[currentDate] = getDateData(currentDate);
             
-            data[today].eveningLight = {
+            data[currentDate].eveningLight = {
                 status: status,
                 time: timeString,
                 timestamp: now.toISOString()
@@ -364,10 +464,19 @@
 
         // Clear light
         function clearLight() {
-            if (!data[today]) data[today] = getTodayData();
-            data[today].eveningLight = { status: 'not_recorded', time: null };
+            if (!data[currentDate]) data[currentDate] = getDateData(currentDate);
+            data[currentDate].eveningLight = { status: 'not_recorded', time: null };
             saveData();
             updateDisplay();
+        }
+
+        // Edit current date
+        function editCurrentDate() {
+            const newDate = prompt('Enter date (YYYY-MM-DD):', currentDate);
+            if (newDate && newDate.match(/^\d{4}-\d{2}-\d{2}$/)) {
+                currentDate = newDate;
+                updateDisplay();
+            }
         }
 
         // Export data
@@ -377,7 +486,7 @@
             const url = URL.createObjectURL(dataBlob);
             const link = document.createElement('a');
             link.href = url;
-            link.download = `vehicle-tracker-${today}.json`;
+            link.download = `l-mcqueen-${currentDate}.json`;
             link.click();
         }
 
@@ -394,12 +503,22 @@
             }
         }
 
+        // Show chart
+        function showChart(chartView) {
+            currentChartView = chartView;
+            document.getElementById('weekBtn').classList.toggle('btn-active', chartView === 'week');
+            document.getElementById('monthBtn').classList.toggle('btn-active', chartView === 'month');
+            document.getElementById('allTimeBtn').classList.toggle('btn-active', chartView === 'allTime');
+            updateChart();
+        }
+
         // Update display
         function updateDisplay() {
-            const todayData = getTodayData();
+            const dateData = getDateData(currentDate);
             
             // Update current date
-            document.getElementById('currentDate').textContent = new Date().toLocaleDateString('en', {
+            const dateObj = new Date(currentDate + 'T00:00:00');
+            document.getElementById('currentDate').textContent = dateObj.toLocaleDateString('en', {
                 weekday: 'long',
                 year: 'numeric',
                 month: 'long',
@@ -410,108 +529,291 @@
             const lightOnBtn = document.getElementById('lightOnBtn');
             const lightOffBtn = document.getElementById('lightOffBtn');
             
-            lightOnBtn.className = 'btn ' + (todayData.eveningLight.status === 'on' ? 'btn-yellow' : 'btn-gray');
-            lightOffBtn.className = 'btn ' + (todayData.eveningLight.status === 'off' ? 'btn-gray' : 'btn-gray');
+            lightOnBtn.className = 'btn ' + (dateData.eveningLight.status === 'on' ? 'btn-yellow' : 'btn-gray');
+            lightOffBtn.className = 'btn ' + (dateData.eveningLight.status === 'off' ? 'btn-gray' : 'btn-gray');
 
             // Update activity list
+            updateActivityList();
+        }
+
+        // Update activity list
+        function updateActivityList() {
+            const dateData = getDateData(currentDate);
             const activityList = document.getElementById('activityList');
             let html = '';
 
-            // Vehicle events
-            todayData.vehicleEvents.forEach((event, index) => {
-                const iconClass = event.type === 'in' ? 'icon-green' : 'icon-red';
-                html += `
-                    <div class="event-item">
-                        <div class="event-content">
-                            <div class="icon ${iconClass}"></div>
-                            <span>Vehicle ${event.type}</span>
-                        </div>
-                        <div class="event-controls">
-                            <span class="event-time" onclick="editTime('vehicle', ${index}, '${event.time}')">${event.time}</span>
-                            <button class="btn btn-small" onclick="deleteEvent('vehicle', ${index})" style="background: rgba(220, 38, 38, 0.2); color: #f87171;">🗑️</button>
-                        </div>
-                    </div>
-                `;
+            // Combine all events with dates
+            const allEvents = [];
+            
+            // Add vehicle events
+            dateData.vehicleEvents.forEach((event, index) => {
+                allEvents.push({
+                    ...event,
+                    category: 'vehicle',
+                    index: index,
+                    date: currentDate,
+                    iconColor: event.type === 'in' ? '#16a34a' : '#dc2626'
+                });
             });
 
-            // Elevator events
-            todayData.elevatorEvents.forEach((event, index) => {
-                const iconClass = event.type === 'in' ? 'icon-purple' : 'icon-orange';
+            // Add elevator events
+            dateData.elevatorEvents.forEach((event, index) => {
+                allEvents.push({
+                    ...event,
+                    category: 'elevator',
+                    index: index,
+                    date: currentDate,
+                    iconColor: event.type === 'in' ? '#9333ea' : '#ea580c'
+                });
+            });
+
+            // Sort by timestamp
+            allEvents.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+
+            // Render events
+            allEvents.forEach(event => {
                 html += `
                     <div class="event-item">
                         <div class="event-content">
-                            <div class="icon ${iconClass}"></div>
-                            <span>Elevator ${event.type}</span>
+                            <div style="width: 16px; height: 16px; border-radius: 50%; background: ${event.iconColor};"></div>
+                            <span>${event.category} ${event.type}</span>
                         </div>
                         <div class="event-controls">
-                            <span class="event-time" onclick="editTime('elevator', ${index}, '${event.time}')">${event.time}</span>
-                            <button class="btn btn-small" onclick="deleteEvent('elevator', ${index})" style="background: rgba(220, 38, 38, 0.2); color: #f87171;">🗑️</button>
+                            <span class="event-date" onclick="editEventDate('${event.category}', ${event.index}, '${event.date}')">${event.date}</span>
+                            <span class="event-time" onclick="editEventTime('${event.category}', ${event.index}, '${event.time}', '${event.date}')">${event.time}</span>
+                            <button class="btn btn-small" onclick="deleteEvent('${event.category}', ${event.index}, '${event.date}')" style="background: rgba(220, 38, 38, 0.2); color: #f87171;">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="3,6 5,6 21,6"/>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                    <line x1="10" y1="11" x2="10" y2="17"/>
+                                    <line x1="14" y1="11" x2="14" y2="17"/>
+                                </svg>
+                            </button>
                         </div>
                     </div>
                 `;
             });
 
             // Light status
-            if (todayData.eveningLight.status !== 'not_recorded') {
+            if (dateData.eveningLight.status !== 'not_recorded') {
                 html += `
                     <div class="event-item">
                         <div class="event-content">
-                            <div class="icon" style="background: #eab308;"></div>
-                            <span>Evening Light ${todayData.eveningLight.status}</span>
+                            <div style="width: 16px; height: 16px; border-radius: 50%; background: #eab308;"></div>
+                            <span>Evening Light ${dateData.eveningLight.status}</span>
                         </div>
                         <div class="event-controls">
-                            <span class="event-time">${todayData.eveningLight.time}</span>
-                            <button class="btn btn-small" onclick="clearLight()" style="background: rgba(220, 38, 38, 0.2); color: #f87171;">🗑️</button>
+                            <span class="event-time">${dateData.eveningLight.time}</span>
+                            <button class="btn btn-small" onclick="clearLight()" style="background: rgba(220, 38, 38, 0.2); color: #f87171;">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="3,6 5,6 21,6"/>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                    <line x1="10" y1="11" x2="10" y2="17"/>
+                                    <line x1="14" y1="11" x2="14" y2="17"/>
+                                </svg>
+                            </button>
                         </div>
                     </div>
                 `;
             }
 
             if (html === '') {
-                html = '<p style="color: #94a3b8; font-size: 14px;">No activity recorded today</p>';
+                html = '<p style="color: #94a3b8; font-size: 14px;">No activity recorded for this date</p>';
             }
 
             activityList.innerHTML = html;
         }
 
-        // Edit time
-        function editTime(category, index, currentTime) {
+        // Edit event time
+        function editEventTime(category, index, currentTime, eventDate) {
             const newTime = prompt('Enter new time (HH:MM):', currentTime);
             if (newTime && newTime.match(/^\d{2}:\d{2}$/)) {
-                updateEventTime(category, index, newTime);
+                updateEventTime(category, index, newTime, eventDate);
             }
+        }
+
+        // Edit event date
+        function editEventDate(category, index, currentDate) {
+            const newDate = prompt('Enter new date (YYYY-MM-DD):', currentDate);
+            if (newDate && newDate.match(/^\d{4}-\d{2}-\d{2}$/)) {
+                updateEventDate(category, index, currentDate, newDate);
+            }
+        }
+
+        // Get chart data
+        function getChartData(view) {
+            const now = new Date();
+            let labels = [];
+            let vehicleData = [];
+            let elevatorData = [];
+
+            if (view === 'week') {
+                // Last 7 days
+                for (let i = 6; i >= 0; i--) {
+                    const date = new Date(now);
+                    date.setDate(date.getDate() - i);
+                    const dateStr = date.toISOString().split('T')[0];
+                    const dayData = data[dateStr];
+                    
+                    labels.push(date.toLocaleDateString('en', { weekday: 'short', month: 'short', day: 'numeric' }));
+                    vehicleData.push(dayData?.vehicleEvents?.length || 0);
+                    elevatorData.push(dayData?.elevatorEvents?.length || 0);
+                }
+            } else if (view === 'month') {
+                // Last 4 weeks
+                for (let i = 3; i >= 0; i--) {
+                    const weekStart = new Date(now);
+                    weekStart.setDate(weekStart.getDate() - (i * 7) - 6);
+                    const weekEnd = new Date(now);
+                    weekEnd.setDate(weekEnd.getDate() - (i * 7));
+                    
+                    let weekVehicle = 0;
+                    let weekElevator = 0;
+                    
+                    for (let d = new Date(weekStart); d <= weekEnd; d.setDate(d.getDate() + 1)) {
+                        const dateStr = d.toISOString().split('T')[0];
+                        const dayData = data[dateStr];
+                        weekVehicle += dayData?.vehicleEvents?.length || 0;
+                        weekElevator += dayData?.elevatorEvents?.length || 0;
+                    }
+                    
+                    labels.push(`Week ${i + 1}`);
+                    vehicleData.push(weekVehicle);
+                    elevatorData.push(weekElevator);
+                }
+            } else {
+                // All time - monthly aggregates
+                const months = {};
+                Object.keys(data).forEach(dateStr => {
+                    const monthKey = dateStr.substring(0, 7); // YYYY-MM
+                    if (!months[monthKey]) {
+                        months[monthKey] = { vehicle: 0, elevator: 0 };
+                    }
+                    months[monthKey].vehicle += data[dateStr].vehicleEvents?.length || 0;
+                    months[monthKey].elevator += data[dateStr].elevatorEvents?.length || 0;
+                });
+                
+                Object.keys(months).sort().forEach(monthKey => {
+                    const date = new Date(monthKey + '-01');
+                    labels.push(date.toLocaleDateString('en', { month: 'short', year: 'numeric' }));
+                    vehicleData.push(months[monthKey].vehicle);
+                    elevatorData.push(months[monthKey].elevator);
+                });
+            }
+
+            return { labels, vehicleData, elevatorData };
+        }
+
+        // Update chart
+        function updateChart() {
+            const ctx = document.getElementById('activityChart').getContext('2d');
+            const chartData = getChartData(currentChartView);
+
+            if (activityChart) {
+                activityChart.destroy();
+            }
+
+            activityChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: chartData.labels,
+                    datasets: [
+                        {
+                            label: 'Vehicle',
+                            data: chartData.vehicleData,
+                            backgroundColor: '#3b82f6',
+                            borderColor: '#2563eb',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Elevator',
+                            data: chartData.elevatorData,
+                            backgroundColor: '#8b5cf6',
+                            borderColor: '#7c3aed',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#cbd5e1'
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                color: '#9ca3af'
+                            },
+                            grid: {
+                                color: '#374151'
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                color: '#9ca3af'
+                            },
+                            grid: {
+                                color: '#374151'
+                            }
+                        }
+                    }
+                }
+            });
         }
 
         // Update dashboard
         function updateDashboard() {
-            let vehicleTotal = 0;
-            let elevatorTotal = 0;
+            updateChart();
+            
+            // Calculate stats based on current chart view
+            const chartData = getChartData(currentChartView);
+            const vehicleTotal = chartData.vehicleData.reduce((sum, val) => sum + val, 0);
+            const elevatorTotal = chartData.elevatorData.reduce((sum, val) => sum + val, 0);
+            
+            // Count light days
             let lightDays = 0;
-
-            // Calculate last 7 days
-            for (let i = 0; i < 7; i++) {
-                const date = new Date();
-                date.setDate(date.getDate() - i);
-                const dateStr = date.toISOString().split('T')[0];
-                const dayData = data[dateStr];
-
-                if (dayData) {
-                    vehicleTotal += dayData.vehicleEvents?.length || 0;
-                    elevatorTotal += dayData.elevatorEvents?.length || 0;
-                    if (dayData.eveningLight?.status === 'on') lightDays++;
+            if (currentChartView === 'week') {
+                for (let i = 6; i >= 0; i--) {
+                    const date = new Date();
+                    date.setDate(date.getDate() - i);
+                    const dateStr = date.toISOString().split('T')[0];
+                    const dayData = data[dateStr];
+                    if (dayData?.eveningLight?.status === 'on') lightDays++;
                 }
             }
-
-            document.getElementById('vehicleTotal').textContent = vehicleTotal;
-            document.getElementById('elevatorTotal').textContent = elevatorTotal;
-            document.getElementById('totalTrips').textContent = vehicleTotal + elevatorTotal;
-            document.getElementById('lightDays').textContent = lightDays;
+            
+            const period = currentChartView === 'week' ? '7 days' : 
+                          currentChartView === 'month' ? '4 weeks' : 'all time';
+            
+            document.getElementById('dashboardStats').innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-number" style="color: #3b82f6;">${vehicleTotal}</div>
+                    <div class="stat-label">Vehicle Trips (${period})</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" style="color: #8b5cf6;">${elevatorTotal}</div>
+                    <div class="stat-label">Elevator Trips (${period})</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" style="color: #16a34a;">${vehicleTotal + elevatorTotal}</div>
+                    <div class="stat-label">Total Trips (${period})</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" style="color: #eab308;">${lightDays}</div>
+                    <div class="stat-label">Days Light On${currentChartView === 'week' ? ' (7 days)' : ''}</div>
+                </div>
+            `;
         }
 
         // Register service worker
         if ('serviceWorker' in navigator) {
             const swCode = `
-                const CACHE_NAME = 'vehicle-tracker-v1';
+                const CACHE_NAME = 'l-mcqueen-v1';
                 self.addEventListener('install', event => {
                     event.waitUntil(caches.open(CACHE_NAME));
                 });
