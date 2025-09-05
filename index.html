@@ -125,14 +125,19 @@
             align-items: center;
             position: relative;
         }
-        .event-item:hover .event-controls { opacity: 1; }
+
         .event-content { display: flex; align-items: center; gap: 12px; }
         .event-controls { 
             display: flex;
             align-items: center;
             gap: 8px;
+        }
+        .delete-btn {
             opacity: 0;
             transition: opacity 0.2s;
+        }
+        .event-item:hover .delete-btn { 
+            opacity: 1; 
         }
         .event-time, .event-date { 
             color: #cbd5e1;
@@ -327,6 +332,58 @@
             <div class="stats" id="dashboardStats">
                 <!-- Stats will be populated by JavaScript -->
             </div>
+
+            <!-- Additional Visualizations -->
+            <div class="card">
+                <div class="section-title">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #10b981;">
+                        <polyline points="4,20 8,10 12,15 16,8 20,12"/>
+                    </svg>
+                    <span>Activity Trends</span>
+                </div>
+                <div class="chart-container">
+                    <canvas id="trendChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="section-title">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #f59e0b;">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                        <path d="M9 9h6v6H9z"/>
+                    </svg>
+                    <span>Activity Heatmap</span>
+                </div>
+                <div class="chart-container">
+                    <canvas id="heatmapChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="section-title">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #8b5cf6;">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12,6 12,12 16,14"/>
+                    </svg>
+                    <span>Time of Day Activity</span>
+                </div>
+                <div class="chart-container">
+                    <canvas id="timeChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="section-title">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #ef4444;">
+                        <path d="M21.21 15.89A10 10 0 1 1 8 2.83"/>
+                        <path d="M22 12A10 10 0 0 0 12 2v10z"/>
+                    </svg>
+                    <span>Activity Distribution</span>
+                </div>
+                <div class="chart-container">
+                    <canvas id="pieChart"></canvas>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -336,6 +393,10 @@
         let currentChartView = 'week';
         let currentDate = new Date().toISOString().split('T')[0];
         let activityChart = null;
+        let trendChart = null;
+        let heatmapChart = null;
+        let timeChart = null;
+        let pieChart = null;
 
         // Load data
         function loadData() {
@@ -441,7 +502,42 @@
 
         // Export data
         function exportData() {
-            const dataStr = JSON.stringify(data, null, 2);
+            // Create consistent export format
+            const exportData = {
+                metadata: {
+                    appName: 'L-McQueen',
+                    exportDate: new Date().toISOString(),
+                    version: '2.0',
+                    dataStructure: {
+                        vehicleEvents: 'Car tracking with in/out types',
+                        elevatorEvents: 'Elevator usage tracking',
+                        lightsEvents: 'Lights usage tracking'
+                    }
+                },
+                data: {}
+            };
+            
+            // Process and clean data for export
+            Object.keys(data).forEach(dateStr => {
+                const dayData = data[dateStr];
+                exportData.data[dateStr] = {
+                    date: dateStr,
+                    carEvents: dayData.vehicleEvents || [],
+                    elevatorEvents: dayData.elevatorEvents || [],
+                    lightsEvents: dayData.lightsEvents || [],
+                    summary: {
+                        carIn: dayData.vehicleEvents?.filter(e => e.type === 'in').length || 0,
+                        carOut: dayData.vehicleEvents?.filter(e => e.type === 'out').length || 0,
+                        elevator: dayData.elevatorEvents?.length || 0,
+                        lights: dayData.lightsEvents?.length || 0,
+                        totalActivity: (dayData.vehicleEvents?.length || 0) + 
+                                     (dayData.elevatorEvents?.length || 0) + 
+                                     (dayData.lightsEvents?.length || 0)
+                    }
+                };
+            });
+            
+            const dataStr = JSON.stringify(exportData, null, 2);
             const dataBlob = new Blob([dataStr], { type: 'application/json' });
             const url = URL.createObjectURL(dataBlob);
             const link = document.createElement('a');
@@ -548,7 +644,7 @@
                         <div class="event-controls">
                             <span class="event-date" onclick="editEventDate('${event.category}', ${event.index}, '${event.date}')">${event.date}</span>
                             <span class="event-time" onclick="editEventTime('${event.category}', ${event.index}, '${event.time}', '${event.date}')">${event.time}</span>
-                            <button class="btn btn-small" onclick="deleteEvent('${event.category}', ${event.index}, '${event.date}')" style="background: rgba(220, 38, 38, 0.2); color: #f87171;">
+                            <button class="btn btn-small delete-btn" onclick="deleteEvent('${event.category}', ${event.index}, '${event.date}')" style="background: rgba(220, 38, 38, 0.2); color: #f87171;">
                                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <polyline points="3,6 5,6 21,6"/>
                                     <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
@@ -612,10 +708,8 @@
                     lightsData.push(dayData?.lightsEvents?.length || 0);
                 }
             } else if (view === 'month') {
-                // Last 4 weeks from data
-                const endDate = allDates.length > 0 ? new Date(allDates[allDates.length - 1]) : new Date();
-                const startDate = new Date(endDate);
-                startDate.setDate(startDate.getDate() - 27); // 4 weeks
+                // 4 weeks from earliest data
+                const startDate = allDates.length > 0 ? new Date(allDates[0]) : new Date();
                 
                 for (let i = 0; i < 4; i++) {
                     const weekStart = new Date(startDate);
@@ -636,7 +730,7 @@
                         }
                     }
                     
-                    labels.push(`Week ${i + 1}`);
+                    labels.push(weekStart.toLocaleDateString('en', { month: 'short', day: 'numeric' }));
                     carInData.push(weekCarIn);
                     carOutData.push(weekCarOut);
                     elevatorData.push(weekElevator);
@@ -734,8 +828,13 @@
                             }
                         },
                         y: {
+                            beginAtZero: true,
                             ticks: {
-                                color: '#9ca3af'
+                                color: '#9ca3af',
+                                stepSize: 1,
+                                callback: function(value) {
+                                    return Number.isInteger(value) ? value : '';
+                                }
                             },
                             grid: {
                                 color: '#374151'
@@ -749,6 +848,7 @@
         // Update dashboard
         function updateDashboard() {
             updateChart();
+            updateAdditionalCharts();
             
             // Calculate stats based on current chart view
             const chartData = getChartData(currentChartView);
@@ -778,6 +878,222 @@
                     <div class="stat-label">Lights (${period})</div>
                 </div>
             `;
+        }
+
+        // Update additional charts
+        function updateAdditionalCharts() {
+            updateTrendChart();
+            updateHeatmapChart();
+            updateTimeChart();
+            updatePieChart();
+        }
+
+        // Trend Chart
+        function updateTrendChart() {
+            const ctx = document.getElementById('trendChart').getContext('2d');
+            const chartData = getChartData('allTime');
+
+            if (trendChart) trendChart.destroy();
+
+            trendChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: chartData.labels,
+                    datasets: [
+                        {
+                            label: 'Car In',
+                            data: chartData.carInData,
+                            borderColor: '#16a34a',
+                            backgroundColor: 'rgba(22, 163, 74, 0.1)',
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Car Out',
+                            data: chartData.carOutData,
+                            borderColor: '#3b82f6',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Elevator',
+                            data: chartData.elevatorData,
+                            borderColor: '#8b5cf6',
+                            backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Lights',
+                            data: chartData.lightsData,
+                            borderColor: '#eab308',
+                            backgroundColor: 'rgba(234, 179, 8, 0.1)',
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { labels: { color: '#cbd5e1' } }
+                    },
+                    scales: {
+                        x: { ticks: { color: '#9ca3af' }, grid: { color: '#374151' } },
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: '#9ca3af',
+                                stepSize: 1,
+                                callback: function(value) {
+                                    return Number.isInteger(value) ? value : '';
+                                }
+                            },
+                            grid: { color: '#374151' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Heatmap Chart (simplified as bar chart showing daily totals)
+        function updateHeatmapChart() {
+            const ctx = document.getElementById('heatmapChart').getContext('2d');
+            const allDates = Object.keys(data).sort();
+            
+            const heatmapData = allDates.map(dateStr => {
+                const dayData = data[dateStr];
+                const total = (dayData.vehicleEvents?.length || 0) + 
+                             (dayData.elevatorEvents?.length || 0) + 
+                             (dayData.lightsEvents?.length || 0);
+                return {
+                    date: new Date(dateStr).toLocaleDateString('en', { month: 'short', day: 'numeric' }),
+                    total: total
+                };
+            });
+
+            if (heatmapChart) heatmapChart.destroy();
+
+            heatmapChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: heatmapData.map(d => d.date),
+                    datasets: [{
+                        label: 'Daily Activity',
+                        data: heatmapData.map(d => d.total),
+                        backgroundColor: heatmapData.map(d => {
+                            if (d.total === 0) return '#374151';
+                            if (d.total <= 2) return '#fbbf24';
+                            if (d.total <= 5) return '#f59e0b';
+                            return '#d97706';
+                        })
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { labels: { color: '#cbd5e1' } }
+                    },
+                    scales: {
+                        x: { ticks: { color: '#9ca3af' }, grid: { color: '#374151' } },
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: '#9ca3af',
+                                stepSize: 1,
+                                callback: function(value) {
+                                    return Number.isInteger(value) ? value : '';
+                                }
+                            },
+                            grid: { color: '#374151' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Time of Day Chart
+        function updateTimeChart() {
+            const ctx = document.getElementById('timeChart').getContext('2d');
+            const hourData = Array(24).fill(0);
+            
+            Object.values(data).forEach(dayData => {
+                [...(dayData.vehicleEvents || []), ...(dayData.elevatorEvents || []), ...(dayData.lightsEvents || [])]
+                    .forEach(event => {
+                        if (event.time) {
+                            const hour = parseInt(event.time.split(':')[0]);
+                            hourData[hour]++;
+                        }
+                    });
+            });
+
+            if (timeChart) timeChart.destroy();
+
+            timeChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: Array.from({length: 24}, (_, i) => `${i}:00`),
+                    datasets: [{
+                        label: 'Activity by Hour',
+                        data: hourData,
+                        backgroundColor: '#8b5cf6'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { labels: { color: '#cbd5e1' } }
+                    },
+                    scales: {
+                        x: { ticks: { color: '#9ca3af' }, grid: { color: '#374151' } },
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: '#9ca3af',
+                                stepSize: 1,
+                                callback: function(value) {
+                                    return Number.isInteger(value) ? value : '';
+                                }
+                            },
+                            grid: { color: '#374151' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Pie Chart
+        function updatePieChart() {
+            const ctx = document.getElementById('pieChart').getContext('2d');
+            
+            let carInTotal = 0, carOutTotal = 0, elevatorTotal = 0, lightsTotal = 0;
+            
+            Object.values(data).forEach(dayData => {
+                carInTotal += dayData.vehicleEvents?.filter(e => e.type === 'in').length || 0;
+                carOutTotal += dayData.vehicleEvents?.filter(e => e.type === 'out').length || 0;
+                elevatorTotal += dayData.elevatorEvents?.length || 0;
+                lightsTotal += dayData.lightsEvents?.length || 0;
+            });
+
+            if (pieChart) pieChart.destroy();
+
+            pieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Car In', 'Car Out', 'Elevator', 'Lights'],
+                    datasets: [{
+                        data: [carInTotal, carOutTotal, elevatorTotal, lightsTotal],
+                        backgroundColor: ['#16a34a', '#3b82f6', '#8b5cf6', '#eab308']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { labels: { color: '#cbd5e1' } }
+                    }
+                }
+            });
         }
 
         // Register service worker
